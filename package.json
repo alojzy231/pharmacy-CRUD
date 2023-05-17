@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "npx rimraf@3 -- --./apps/**/.turbo ./node_modules ./package-lock.json ./apps/**/.next ./apps/**/dist ./apps/**/node_modules ./packages/**/dist ./packages/**/node_modules",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.6.3",
+    "@commitlint/config-conventional": "17.6.3",
+    "eslint": "8.40.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.2",
+    "prettier": "2.8.8",
+    "turbo": "1.9.6"
+  },
+  "packageManager": "pnpm@7.15.0",
+  "name": "pharmacy-crud"
+}

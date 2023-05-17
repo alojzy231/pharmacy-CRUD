@@ -1,0 +1,16 @@
+# https://github.com/actions/labeler
+# Adds labels to pull requests based on the files that are changed.
+name: Add Labels
+on: pull_request_target
+
+jobs:
+  add-labels:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

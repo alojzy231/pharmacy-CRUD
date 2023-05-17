@@ -1,0 +1,19 @@
+frontend:
+  - apps/frontend/**/*
+  - apps/admin-panel/**/*
+  - packages/api-hooks/**/*
+  - packages/eslint-config-frontend/**/*
+  - packages/ui/**/*
+
+backend:
+  - apps/backend/**/*
+  - apps/admin-backend/**/*
+  - packages/prisma-client/**/*
+
+dependencies:
+  - package.json
+
+documentation:
+  - docs/**/*
+  - apps/**/*.md
+  - README.md
