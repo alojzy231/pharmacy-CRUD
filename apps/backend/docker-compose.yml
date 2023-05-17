@@ -12,6 +12,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ZAQ!2wsx
       MYSQL_DATABASE: pharmacy
+    ports:
+      - 3306:3306
 
   adminer:
     image: adminer
