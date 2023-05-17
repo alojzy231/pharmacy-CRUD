@@ -4,7 +4,11 @@
     "build": "turbo run build",
     "clean": "npx rimraf@3 -- --./apps/**/.turbo ./node_modules ./package-lock.json ./apps/**/.next ./apps/**/dist ./apps/**/node_modules ./packages/**/dist ./packages/**/node_modules",
     "dev": "turbo run dev",
+    "dev:frontend": "turbo run dev --filter frontend",
+    "dev:backend": "turbo run dev --filter backend",
     "lint": "turbo run lint",
+    "lint:frontend": "turbo run lint --filter frontend",
+    "lint:backend": "turbo run lint --filter backend",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
