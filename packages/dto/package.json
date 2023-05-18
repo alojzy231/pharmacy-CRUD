@@ -1,0 +1,15 @@
+{
+  "name": "@pharmacy-crud/dto",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "prebuild": "rimraf dist"
+  },
+  "dependencies": {
+    "zod": "3.21.4"
+  },
+  "devDependencies": {
+    "rimraf": "5.0.0"
+  }
+}
