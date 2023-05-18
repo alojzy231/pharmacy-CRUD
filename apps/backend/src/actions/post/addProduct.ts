@@ -1,13 +1,10 @@
-import z from "zod";
 import { PrismaClient } from "@prisma/client";
 
-import { ProductsCreateOneSchema } from "@schemas";
+import { AddProductDTO } from "@pharmacy-crud/dto";
 
 const prisma = new PrismaClient();
 
-export async function addProduct(
-  data: z.infer<typeof ProductsCreateOneSchema>["data"]
-) {
+export async function addProduct(data: AddProductDTO) {
   try {
     await prisma.products.create({
       data,
