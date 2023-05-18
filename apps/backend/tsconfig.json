@@ -13,6 +13,11 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "../../node_modules/@types", "./src/typings"],
+    "baseUrl": ".",
+    "paths": {
+      "@schemas": ["prisma/generated/schemas/index.ts"],
+      "@actions/*": ["src/actions/*"],
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules/", "src/**/*.spec.ts", "src/tests/**/*"],

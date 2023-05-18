@@ -1,37 +1,29 @@
 import express, { Request, Response } from "express";
+import { ProductsCreateOneSchema } from "@schemas";
+import { addProduct } from "@actions/post";
 
-const PORT = 8000;
+const PORT = 3000;
 
 const app = express();
 
-import { PrismaClient } from "@prisma/client";
+app.get("/", (request: Request, response: Response) => {
+  response.send("Hello World!");
+});
 
-const prisma = new PrismaClient();
+app.post("/add-product", async (request: Request, response: Response) => {
+  try {
+    const { data } = await ProductsCreateOneSchema.parse(request.body);
 
-async function main() {
-  const user = await prisma.user.create({
-    data: {
-      name: "Alice",
-      email: "alice@prisma.io",
-    },
-  });
-  console.log(user);
-}
+    await addProduct(data);
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
-//
-// app.get('/', (request:Request, response:Response) => {
-//   response.send('Hello World!');
-// });
-//
-// app.listen(PORT, () => {
-//   console.log(`Server listening on port ${PORT}`);
-// })
+    response.status(200).json({
+      data,
+    });
+  } catch (error) {
+    response.status(400).json({ message: error });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
