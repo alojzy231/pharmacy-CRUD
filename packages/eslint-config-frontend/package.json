@@ -1,5 +1,5 @@
 {
-  "name": "@pharmacy-CRUD/eslint-config-frontend",
+  "name": "@pharmacy-crud/eslint-config-frontend",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {

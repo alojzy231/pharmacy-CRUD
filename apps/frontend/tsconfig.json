@@ -1,5 +1,5 @@
 {
-  "extends": "@pharmacy-CRUD/tsconfig-frontend",
+  "extends": "@pharmacy-crud/tsconfig-frontend",
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
