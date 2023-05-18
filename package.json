@@ -3,6 +3,7 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "npx rimraf@3 -- --./apps/**/.turbo ./node_modules ./package-lock.json ./apps/**/.next ./apps/**/dist ./apps/**/node_modules ./packages/**/dist ./packages/**/node_modules",
+    "db:migrate:dev": "turbo run db:migrate:dev --filter backend",
     "dev": "turbo run dev",
     "dev:frontend": "turbo run dev --filter frontend",
     "dev:backend": "turbo run dev --filter backend",
