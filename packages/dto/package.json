@@ -1,15 +1,20 @@
 {
   "name": "@pharmacy-crud/dto",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "type": "module",
+  "main": "dist/src/index.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "prebuild": "rimraf dist"
   },
   "dependencies": {
+    "@prisma/client": "4.14.1",
     "zod": "3.21.4"
   },
   "devDependencies": {
-    "rimraf": "5.0.0"
+    "@types/node": "17.0.12",
+    "rimraf": "5.0.0",
+    "tsc-alias": "1.8.6",
+    "typescript": "4.5.3"
   }
 }
