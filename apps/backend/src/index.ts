@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { ProductsCreateOneSchema } from "@schemas";
 import { addProduct } from "@actions/post";
+import { ProductsCreateOneSchema } from "@pharmacy-crud/dto";
 
 const PORT = 3000;
 
