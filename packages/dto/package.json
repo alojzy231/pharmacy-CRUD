@@ -1,9 +1,12 @@
 {
   "name": "@pharmacy-crud/dto",
   "version": "1.0.0",
-  "type": "module",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "build": "tsup index.ts --dts && tsc-alias",
     "prebuild": "rimraf dist"
