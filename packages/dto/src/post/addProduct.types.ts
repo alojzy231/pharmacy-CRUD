@@ -1,5 +1,5 @@
 import z from 'zod';
 
-import { ProductsCreateOneSchema } from "@schemas/createOneProducts.schema";
+import { ProductsCreateInputObjectSchema } from "@schemas/objects/ProductsCreateInput.schema";
 
-export type AddProductDTO = z.infer<typeof ProductsCreateOneSchema>['data']
+export type AddProductDTO = z.infer<typeof ProductsCreateInputObjectSchema>
