@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export async function addProduct(data: AddProductDTO) {
   try {
-    await prisma.products.create({
+    await prisma.product.create({
       data,
     });
   } catch (error) {
