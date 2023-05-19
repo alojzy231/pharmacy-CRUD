@@ -4,10 +4,9 @@ import { AddProductDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
 import { ControlledNumberInput, ControlledTextInput } from '@components/ControlledInputs';
+import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 
 import { defaultValues, FieldValues, schema } from './schema';
-
-const onSubmit = (data: AddProductDTO) => console.log('Form sent', data);
 
 export function MainView(): JSX.Element {
   const { control, handleSubmit } = useForm<FieldValues>({
@@ -15,12 +14,21 @@ export function MainView(): JSX.Element {
     resolver: zodResolver(schema),
   });
 
+  const { mutateAsync: addProduct } = useAddProduct();
+
+  const onSubmit = async (data: AddProductDTO) => {
+    try {
+      await addProduct(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Box maw={320} mt={64} mx="auto">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <ControlledTextInput control={control} label="Price" name="price" />
-        <ControlledTextInput control={control} label="Type" name="type" />
         <ControlledTextInput control={control} label="Name" name="name" />
+        <ControlledTextInput control={control} label="Type" name="type" />
         <ControlledTextInput control={control} label="Category" name="category" />
         <ControlledNumberInput control={control} label="Quantity" name="quantity" />
         <ControlledNumberInput control={control} label="Price" name="price" />
