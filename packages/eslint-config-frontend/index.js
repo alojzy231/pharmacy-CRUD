@@ -44,6 +44,7 @@ module.exports = {
           ["sibling", "index"],
         ],
         "newlines-between": "always",
+        pathGroups: [{ group: "internal", pattern: "@features/**" }],
         pathGroupsExcludedImportTypes: ["react"],
       },
     ],
@@ -75,6 +76,6 @@ module.exports = {
       "error",
       { replacements: { props: false, ref: false } },
     ],
-    "unicorn/expiring-todo-comments": "off"
+    "unicorn/expiring-todo-comments": "off",
   },
 };

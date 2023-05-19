@@ -6,6 +6,12 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@features/*": ["features/*"],
+    }
+  },
   "exclude": [
     "node_modules"
   ]

@@ -11,16 +11,20 @@
     "lint:fix": "eslint . --cache --fix"
   },
   "dependencies": {
+    "@hookform/resolvers": "3.1.0",
     "next": "13.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hook-form": "7.43.9",
+    "zod": "3.21.4"
   },
   "devDependencies": {
+    "@pharmacy-crud/dto": "workspace:*",
+    "@pharmacy-crud/eslint-config-frontend": "workspace:*",
+    "@pharmacy-crud/tsconfig-frontend": "workspace:*",
     "@types/node": "17.0.12",
     "@types/react": "18.0.22",
     "@types/react-dom": "18.0.7",
-    "@pharmacy-crud/eslint-config-frontend": "workspace:*",
-    "@pharmacy-crud/tsconfig-frontend": "workspace:*",
     "typescript": "4.5.3"
   }
 }
