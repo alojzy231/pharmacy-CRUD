@@ -44,47 +44,6 @@ module.exports = {
           ["sibling", "index"],
         ],
         "newlines-between": "always",
-        pathGroups: [
-          {
-            group: "builtin",
-            pattern: "react",
-            position: "before",
-          },
-          {
-            group: "internal",
-            // group every import from @master-crm/* in modules from @master-crm/ui/*
-            pattern: "@master-crm/!(ui)",
-            position: "before",
-          },
-          {
-            group: "internal",
-            // minimatch pattern to group modules from @master-crm/ui except icons
-            // https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/file-matching-patterns?view=azure-devops
-            pattern: "@master-crm/ui/!(icons)",
-            position: "before",
-          },
-          {
-            group: "internal",
-            pattern: "@master-crm/ui/icons",
-            position: "before",
-          },
-          { group: "internal", pattern: "@api/**" },
-          { group: "internal", pattern: "@components/**" },
-          { group: "internal", pattern: "@contextProviders/**" },
-          { group: "internal", pattern: "@config/**" },
-          { group: "internal", pattern: "@consts/**" },
-          { group: "internal", pattern: "@features/**" },
-          { group: "internal", pattern: "@layouts/**" },
-          { group: "internal", pattern: "@hocs/**" },
-          { group: "internal", pattern: "@hooks/**" },
-          { group: "internal", pattern: "@styles/**" },
-          { group: "internal", pattern: "@utils/**" },
-          {
-            group: "internal",
-            pattern: "@assets/**",
-            position: "after",
-          },
-        ],
         pathGroupsExcludedImportTypes: ["react"],
       },
     ],
