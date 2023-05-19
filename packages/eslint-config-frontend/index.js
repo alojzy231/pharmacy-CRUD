@@ -75,5 +75,6 @@ module.exports = {
       "error",
       { replacements: { props: false, ref: false } },
     ],
+    "unicorn/expiring-todo-comments": "off"
   },
 };
