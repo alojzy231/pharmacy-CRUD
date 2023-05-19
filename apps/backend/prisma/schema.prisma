@@ -15,12 +15,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Products {
-  id                   Int        @id @default(autoincrement())
-  name                 String     @unique
-  substitutes          Products[] @relation("ProductSubstitutes")
-  substitutedBy        Products[] @relation("ProductSubstitutes")
-  quantity             String
+model Product {
+  id                   Int       @id @default(autoincrement())
+  name                 String    @unique
+  substitutes          Product[] @relation("ProductSubstitutes")
+  substitutedBy        Product[] @relation("ProductSubstitutes")
+  quantity             Int
   price                Float
   isPrescriptionNeeded Boolean
   category             String
