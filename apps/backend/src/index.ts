@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import { addProduct } from "@actions/post";
 import { ProductsCreateOneSchema } from "@pharmacy-crud/dto";
+import "dotenv/config";
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const app = express();
 
