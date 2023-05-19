@@ -1,6 +1,3 @@
-import z from "zod";
-import { ProductOrderByWithRelationInputObjectSchema } from "@schemas/objects/ProductOrderByWithRelationInput.schema";
+import { AddProductDTO } from "../post";
 
-export type GetProductsDTO = z.infer<
-  typeof ProductOrderByWithRelationInputObjectSchema
->;
+export type GetProductsResultDTO = AddProductDTO[];
