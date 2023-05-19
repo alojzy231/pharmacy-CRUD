@@ -9,7 +9,7 @@ import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { defaultValues, FieldValues, schema } from './schema';
 
 export function MainView(): JSX.Element {
-  const { control, handleSubmit } = useForm<FieldValues>({
+  const { control, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues,
     resolver: zodResolver(schema),
   });
@@ -19,6 +19,8 @@ export function MainView(): JSX.Element {
   const onSubmit = async (data: AddProductDTO) => {
     try {
       await addProduct(data);
+
+      reset();
     } catch (error) {
       console.log(error);
     }
