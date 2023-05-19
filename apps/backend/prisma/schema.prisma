@@ -7,7 +7,7 @@ generator client {
 
 generator zod {
   provider = "prisma-zod-generator"
-  output = "../../../packages/dto/prisma"
+  output   = "../../../packages/dto/prisma"
 }
 
 datasource db {
@@ -16,13 +16,13 @@ datasource db {
 }
 
 model Products {
-  id    Int     @id @default(autoincrement())
-  name String  @unique
-  substitutes  Products[] @relation("ProductSubstitutes")
-  substitutedBy  Products[]  @relation("ProductSubstitutes")
-  quantity String
-  price Float
+  id                   Int        @id @default(autoincrement())
+  name                 String     @unique
+  substitutes          Products[] @relation("ProductSubstitutes")
+  substitutedBy        Products[] @relation("ProductSubstitutes")
+  quantity             String
+  price                Float
   isPrescriptionNeeded Boolean
-  category String
-  type String
+  category             String
+  type                 String
 }
