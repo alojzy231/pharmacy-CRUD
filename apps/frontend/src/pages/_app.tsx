@@ -1,17 +1,26 @@
 import { MantineProvider } from '@mantine/core';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 function App({ Component, pageProps }: AppProps): ReactNode {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <>
       <Head>
         <title>Pharmacy - CRUD</title>
       </Head>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <Component {...pageProps} />
-      </MantineProvider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <MantineProvider withGlobalStyles withNormalizeCSS>
+            <Component {...pageProps} />
+          </MantineProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Hydrate>
+      </QueryClientProvider>
     </>
   );
 }

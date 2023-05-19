@@ -1,14 +1,14 @@
 import { AddProductDTO } from '@pharmacy-crud/dto';
 
-import { PharmacyCRUDClientApiClient } from '../../clients/PharmacyCRUDClient';
+import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
 class ProductService extends PharmacyCRUDClientApiClient {
   constructor() {
     super();
   }
 
-  addProduct() {
-    return this.api.get<AddProductDTO>('/add-product');
+  addProduct(data: AddProductDTO) {
+    return this.api.post<AddProductDTO>('/add-product', { data });
   }
 }
 

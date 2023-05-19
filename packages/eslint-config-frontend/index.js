@@ -45,6 +45,7 @@ module.exports = {
         ],
         "newlines-between": "always",
         pathGroups: [
+          { group: "internal", pattern: "@api/**" },
           { group: "internal", pattern: "@features/**" },
           { group: "internal", pattern: "@components/**" },
         ],
