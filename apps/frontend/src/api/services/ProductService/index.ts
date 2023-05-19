@@ -1,4 +1,5 @@
 import { AddProductDTO, GetProductsResultDTO } from '@pharmacy-crud/dto';
+import { AxiosResponse } from 'axios';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
@@ -11,7 +12,7 @@ class ProductService extends PharmacyCRUDClientApiClient {
     return this.api.post<AddProductDTO>('/add-product', { data });
   }
   getProducts() {
-    return this.api.get<GetProductsResultDTO>('/get-products');
+    return this.api.get<AxiosResponse<GetProductsResultDTO>>('/get-products');
   }
 }
 

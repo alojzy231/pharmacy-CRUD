@@ -11,7 +11,7 @@ export const productsKey = {
 const getProducts = async () => {
   const { data } = await productService.getProducts();
 
-  return data;
+  return data?.data;
 };
 
 export const useGetProducts = (): UseQueryResult<GetProductsResultDTO> =>
