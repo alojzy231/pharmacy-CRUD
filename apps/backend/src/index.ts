@@ -7,11 +7,11 @@ const PORT = process.env.PORT;
 
 const app = express();
 
-app.get("/", (request: Request, response: Response) => {
-  response.send("Hello World!");
+app.get("/v1/ping", (request: Request, response: Response) => {
+  response.send("pong!");
 });
 
-app.post("/add-product", async (request: Request, response: Response) => {
+app.post("v1/add-product", async (request: Request, response: Response) => {
   try {
     const { data } = await ProductsCreateOneSchema.parse(request.body);
 
