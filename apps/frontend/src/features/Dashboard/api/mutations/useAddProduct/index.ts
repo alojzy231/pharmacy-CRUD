@@ -8,4 +8,5 @@ const addProduct = async (addProduct: AddProductDTO) => {
   await productService.addProduct(addProduct);
 };
 
-export const useAddProduct = (): UseMutationResult<AddProductDTO> => useMutation(addProduct);
+export const useAddProduct = (): UseMutationResult<unknown, unknown, AddProductDTO> =>
+  useMutation(addProduct);

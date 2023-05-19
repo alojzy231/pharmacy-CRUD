@@ -1,10 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button } from '@mantine/core';
 import { AddProductDTO } from '@pharmacy-crud/dto';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ControlledNumberInput, ControlledTextInput } from '@components/ControlledInputs';
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
+import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
 
 import { defaultValues, FieldValues, schema } from './schema';
 
@@ -15,6 +17,11 @@ export function MainView(): JSX.Element {
   });
 
   const { mutateAsync: addProduct } = useAddProduct();
+  const { data } = useGetProducts();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const onSubmit = async (data: AddProductDTO) => {
     try {
