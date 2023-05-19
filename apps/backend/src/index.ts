@@ -1,19 +1,23 @@
 import express, { Request, Response } from "express";
 import { addProduct } from "@actions/post";
-import { ProductsCreateOneSchema } from "@pharmacy-crud/dto";
+import { ProductCreateOneSchema } from "@pharmacy-crud/dto";
 import "dotenv/config";
+import cors from "cors";
 
 const PORT = process.env.PORT;
 
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+
 app.get("/v1/ping", (request: Request, response: Response) => {
   response.send("pong!");
 });
 
-app.post("v1/add-product", async (request: Request, response: Response) => {
+app.post("/v1/add-product", async (request: Request, response: Response) => {
   try {
-    const { data } = await ProductsCreateOneSchema.parse(request.body);
+    const { data } = await ProductCreateOneSchema.parse(request.body);
 
     await addProduct(data);
 
