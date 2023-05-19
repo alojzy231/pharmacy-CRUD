@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import { AddProductDTO } from "@pharmacy-crud/dto";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../client";
 
 export async function addProduct(data: AddProductDTO) {
   try {
