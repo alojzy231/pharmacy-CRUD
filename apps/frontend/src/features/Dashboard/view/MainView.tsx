@@ -1,42 +1,34 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { Box, Button } from '@mantine/core';
+import { AddProductDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
+
+import { ControlledNumberInput, ControlledTextInput } from '@components/ControlledInputs';
 
 import { defaultValues, FieldValues, schema } from './schema';
 
+const onSubmit = (data: AddProductDTO) => console.log('Form sent', data);
+
 export function MainView(): JSX.Element {
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<FieldValues>({
+  const { control, handleSubmit } = useForm<FieldValues>({
     defaultValues,
     resolver: zodResolver(schema),
   });
-  const onSubmit = (data: FieldValues) => console.log(data);
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Name</label>
-      <input {...register('name')} />
-      <br />
-      <label>Category</label>
-      <input {...register('category')} />
-      <br />
-      <label>Price</label>
-      <input type="number" {...register('price')} />
-      <br />
-      <label>Quantity</label>
-      <input type="number" {...register('quantity')} />
-      <br />
-      <label>Type</label>
-      <input {...register('type')} />
-      <br />
-      <button>Submit</button>
-    </form>
+    <Box maw={320} mt={64} mx="auto">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ControlledTextInput control={control} label="Price" name="price" />
+        <ControlledTextInput control={control} label="Type" name="type" />
+        <ControlledTextInput control={control} label="Name" name="name" />
+        <ControlledTextInput control={control} label="Category" name="category" />
+        <ControlledNumberInput control={control} label="Quantity" name="quantity" />
+        <ControlledNumberInput control={control} label="Price" name="price" />
+
+        <Button fullWidth mt={12} type="submit">
+          Submit
+        </Button>
+      </form>
+    </Box>
   );
 }

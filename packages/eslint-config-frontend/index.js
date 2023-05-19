@@ -44,7 +44,10 @@ module.exports = {
           ["sibling", "index"],
         ],
         "newlines-between": "always",
-        pathGroups: [{ group: "internal", pattern: "@features/**" }],
+        pathGroups: [
+          { group: "internal", pattern: "@features/**" },
+          { group: "internal", pattern: "@components/**" },
+        ],
         pathGroupsExcludedImportTypes: ["react"],
       },
     ],

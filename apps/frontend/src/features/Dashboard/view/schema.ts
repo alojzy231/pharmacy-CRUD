@@ -1,15 +1,21 @@
-import { ProductsCreateInputObjectSchema } from '@pharmacy-crud/dto/dist';
 import z from 'zod';
 
-export const schema = ProductsCreateInputObjectSchema;
+export const schema = z.object({
+  category: z.string().min(1),
+  isPrescriptionNeeded: z.boolean(),
+  name: z.string().min(1),
+  price: z.number(),
+  quantity: z.number(),
+  type: z.string().min(1),
+});
 
 export type FieldValues = z.infer<typeof schema>;
 
 export const defaultValues: FieldValues = {
-  category: undefined,
+  category: '',
   isPrescriptionNeeded: false,
-  name: undefined,
-  price: undefined,
+  name: '',
+  price: 0,
   quantity: 0,
-  type: undefined,
+  type: '',
 };
