@@ -15,7 +15,7 @@ function App({ Component, pageProps }: AppProps): ReactNode {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <MantineProvider withGlobalStyles withNormalizeCSS>
+          <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
             <Component {...pageProps} />
           </MantineProvider>
           <ReactQueryDevtools initialIsOpen={false} />

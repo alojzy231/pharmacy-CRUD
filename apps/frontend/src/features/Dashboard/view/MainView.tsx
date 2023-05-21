@@ -3,7 +3,11 @@ import { Box, Button, Container } from '@mantine/core';
 import { AddProductDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
-import { ControlledNumberInput, ControlledTextInput } from '@components/ControlledInputs';
+import {
+  ControlledCheckbox,
+  ControlledNumberInput,
+  ControlledTextInput,
+} from '@components/ControlledInputs';
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
 import { ProductsTable } from '@features/Dashboard/view/ProductsTable';
@@ -38,8 +42,13 @@ export function MainView(): JSX.Element {
           <ControlledTextInput control={control} label="Category" name="category" />
           <ControlledNumberInput control={control} label="Quantity" name="quantity" />
           <ControlledNumberInput control={control} label="Price" name="price" />
-
-          <Button fullWidth mt={12} type="submit">
+          <ControlledCheckbox
+            control={control}
+            label="Prescription needed"
+            my={12}
+            name="isPrescriptionNeeded"
+          />
+          <Button fullWidth type="submit">
             Submit
           </Button>
         </form>
