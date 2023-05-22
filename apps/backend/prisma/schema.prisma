@@ -15,14 +15,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ProductType {
+  MEDICINE
+  COSMETIC
+  FOOD
+  OTHER
+}
+
+enum ProductCategory {
+  ANTIBIOTIC
+  ANTIVIRAL
+  ANTIFUNGAL
+  ANTIPARASITIC
+  ANTIPYRETIC
+  ANALGESIC
+  ANESTHETIC
+  ANTISEPTIC
+  DISINFECTANT
+  ANTACID
+  LAXATIVE
+  DIURETIC
+  HORMONE
+  VITAMIN
+  MINERAL
+  NUTRITIONAL_SUPPLEMENT
+  OTHER
+}
+
 model Product {
-  id                   Int       @id @default(autoincrement())
-  name                 String    @unique
-  substitutes          Product[] @relation("ProductSubstitutes")
-  substitutedBy        Product[] @relation("ProductSubstitutes")
+  id                   Int             @id @default(autoincrement())
+  name                 String          @unique
+  substitutes          Product[]       @relation("ProductSubstitutes")
+  substitutedBy        Product[]       @relation("ProductSubstitutes")
   quantity             Int
   price                Float
   isPrescriptionNeeded Boolean
-  category             String
-  type                 String
+  category             ProductCategory
+  type                 ProductType
 }

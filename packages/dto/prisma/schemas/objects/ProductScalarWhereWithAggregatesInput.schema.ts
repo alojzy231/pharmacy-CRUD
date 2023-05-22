@@ -3,6 +3,10 @@ import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.s
 import { StringWithAggregatesFilterObjectSchema } from './StringWithAggregatesFilter.schema';
 import { FloatWithAggregatesFilterObjectSchema } from './FloatWithAggregatesFilter.schema';
 import { BoolWithAggregatesFilterObjectSchema } from './BoolWithAggregatesFilter.schema';
+import { EnumProductCategoryWithAggregatesFilterObjectSchema } from './EnumProductCategoryWithAggregatesFilter.schema';
+import { ProductCategorySchema } from '../enums/ProductCategory.schema';
+import { EnumProductTypeWithAggregatesFilterObjectSchema } from './EnumProductTypeWithAggregatesFilter.schema';
+import { ProductTypeSchema } from '../enums/ProductType.schema';
 
 import type { Prisma } from '@prisma/client';
 
@@ -40,10 +44,16 @@ const Schema: z.ZodType<Prisma.ProductScalarWhereWithAggregatesInput> = z
       .union([z.lazy(() => BoolWithAggregatesFilterObjectSchema), z.boolean()])
       .optional(),
     category: z
-      .union([z.lazy(() => StringWithAggregatesFilterObjectSchema), z.string()])
+      .union([
+        z.lazy(() => EnumProductCategoryWithAggregatesFilterObjectSchema),
+        z.lazy(() => ProductCategorySchema),
+      ])
       .optional(),
     type: z
-      .union([z.lazy(() => StringWithAggregatesFilterObjectSchema), z.string()])
+      .union([
+        z.lazy(() => EnumProductTypeWithAggregatesFilterObjectSchema),
+        z.lazy(() => ProductTypeSchema),
+      ])
       .optional(),
   })
   .strict();

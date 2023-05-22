@@ -3,6 +3,10 @@ import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdat
 import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
 import { FloatFieldUpdateOperationsInputObjectSchema } from './FloatFieldUpdateOperationsInput.schema';
 import { BoolFieldUpdateOperationsInputObjectSchema } from './BoolFieldUpdateOperationsInput.schema';
+import { ProductCategorySchema } from '../enums/ProductCategory.schema';
+import { EnumProductCategoryFieldUpdateOperationsInputObjectSchema } from './EnumProductCategoryFieldUpdateOperationsInput.schema';
+import { ProductTypeSchema } from '../enums/ProductType.schema';
+import { EnumProductTypeFieldUpdateOperationsInputObjectSchema } from './EnumProductTypeFieldUpdateOperationsInput.schema';
 import { ProductUpdateManyWithoutSubstitutesNestedInputObjectSchema } from './ProductUpdateManyWithoutSubstitutesNestedInput.schema';
 
 import type { Prisma } from '@prisma/client';
@@ -35,14 +39,14 @@ const Schema: z.ZodType<Prisma.ProductUpdateWithoutSubstitutesInput> = z
       .optional(),
     category: z
       .union([
-        z.string(),
-        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => ProductCategorySchema),
+        z.lazy(() => EnumProductCategoryFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     type: z
       .union([
-        z.string(),
-        z.lazy(() => StringFieldUpdateOperationsInputObjectSchema),
+        z.lazy(() => ProductTypeSchema),
+        z.lazy(() => EnumProductTypeFieldUpdateOperationsInputObjectSchema),
       ])
       .optional(),
     substitutedBy: z
