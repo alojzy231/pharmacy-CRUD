@@ -15,13 +15,13 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.3",
-    "@commitlint/config-conventional": "17.6.3",
-    "eslint": "8.40.0",
+    "@commitlint/cli": "17.6.5",
+    "@commitlint/config-conventional": "17.6.5",
+    "eslint": "8.41.0",
     "husky": "8.0.3",
     "lint-staged": "13.2.2",
     "prettier": "2.8.8",
-    "turbo": "1.9.6"
+    "turbo": "1.10.1"
   },
   "packageManager": "pnpm@7.15.0",
   "name": "pharmacy-crud"
