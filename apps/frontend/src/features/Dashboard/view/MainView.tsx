@@ -1,15 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Container } from '@mantine/core';
+import { Box, Button, Container, Stack } from '@mantine/core';
 import { AddProductDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
 import {
   ControlledCheckbox,
   ControlledNumberInput,
+  ControlledSelect,
   ControlledTextInput,
 } from '@components/ControlledInputs';
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
+import { CATEGORIES, TYPES } from '@features/Dashboard/view/const';
 import { ProductsTable } from '@features/Dashboard/view/ProductsTable';
 
 import { defaultValues, FieldValues, schema } from './schema';
@@ -35,24 +37,23 @@ export function MainView(): JSX.Element {
 
   return (
     <Container>
-      <Box maw={320} mt={64} mx="auto">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack maw={320} mt={64} mx="auto" spacing={24}>
           <ControlledTextInput control={control} label="Name" name="name" />
-          <ControlledTextInput control={control} label="Type" name="type" />
-          <ControlledTextInput control={control} label="Category" name="category" />
+          <ControlledSelect control={control} data={TYPES} label="Type" name="type" />
+          <ControlledSelect control={control} data={CATEGORIES} label="Category" name="category" />
           <ControlledNumberInput control={control} label="Quantity" name="quantity" />
           <ControlledNumberInput control={control} label="Price" name="price" />
           <ControlledCheckbox
             control={control}
             label="Prescription needed"
-            my={12}
             name="isPrescriptionNeeded"
           />
           <Button fullWidth type="submit">
             Submit
           </Button>
-        </form>
-      </Box>
+        </Stack>
+      </form>
       <Box mt={32}>{data ? <ProductsTable data={data} /> : 'Loading...'}</Box>
     </Container>
   );
