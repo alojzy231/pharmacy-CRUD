@@ -27,6 +27,7 @@
     "typescript": "5.1.3"
   },
   "dependencies": {
+    "@pharmacy-crud/prisma-client": "workspace:*",
     "@prisma/client": "4.15.0",
     "cors": "2.8.5",
     "dotenv": "16.1.3",

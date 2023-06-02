@@ -1,14 +1,11 @@
-import { GetProductsResultDTO } from "@pharmacy-crud/dto";
-import { prisma } from "../../client";
+import { prismaClient, Product } from "@pharmacy-crud/prisma-client";
 
-export const getProducts = async (): Promise<
-  GetProductsResultDTO | undefined
-> => {
+export const getProducts = async (): Promise<Product[] | undefined> => {
   try {
-    return await prisma.product.findMany();
+    return await prismaClient.product.findMany();
   } catch (error) {
     console.error(`Error getting all products: ${error}`);
   } finally {
-    prisma.$disconnect();
+    prismaClient.$disconnect();
   }
 };
