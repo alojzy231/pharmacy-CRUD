@@ -17,6 +17,7 @@
     "@pharmacy-crud/prisma-client": "workspace:*"
   },
   "devDependencies": {
+    "@pharmacy-crud/eslint-config": "workspace:*",
     "@types/node": "20.2.5",
     "rimraf": "5.0.1",
     "tsup": "6.7.0",

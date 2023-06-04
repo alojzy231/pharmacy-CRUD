@@ -157,6 +157,9 @@ importers:
         specifier: workspace:*
         version: link:../prisma-client
     devDependencies:
+      '@pharmacy-crud/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
       '@types/node':
         specifier: 20.2.5
         version: 20.2.5
