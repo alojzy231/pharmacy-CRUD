@@ -56,6 +56,9 @@ importers:
         specifier: 3.21.4
         version: 3.21.4
     devDependencies:
+      '@pharmacy-crud/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
       '@tsconfig/node16':
         specifier: 1.0.4
         version: 1.0.4

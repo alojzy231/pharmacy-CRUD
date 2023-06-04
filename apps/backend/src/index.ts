@@ -1,8 +1,9 @@
-import express, { Request, Response } from "express";
-import { addProduct } from "@actions/post";
-import "dotenv/config";
 import cors from "cors";
+import express, { Request, Response } from "express";
+import "dotenv/config";
+
 import { getProducts } from "@actions/get";
+import { addProduct } from "@actions/post";
 
 const PORT = process.env.PORT;
 

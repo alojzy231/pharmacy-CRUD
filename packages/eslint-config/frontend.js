@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["next/core-web-vitals", "./base.js"],
+  extends: ["./base.js"],
   overrides: [
     {
       extends: ["plugin:testing-library/react", "plugin:jest-dom/recommended"],

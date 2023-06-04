@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "exports": {
     "./base" : "./base.js",
+    "./backend" : "./backend.js",
     "./frontend" : "./frontend.js"
   },
   "dependencies": {

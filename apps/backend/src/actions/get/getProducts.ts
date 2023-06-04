@@ -1,5 +1,5 @@
-import { prismaClient } from "@pharmacy-crud/prisma-client";
 import { GetProductsResultDTO } from "@pharmacy-crud/dto";
+import { prismaClient } from "@pharmacy-crud/prisma-client";
 
 export const getProducts = async (): Promise<
   GetProductsResultDTO | undefined
