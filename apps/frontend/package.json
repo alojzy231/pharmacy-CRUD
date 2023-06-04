@@ -26,7 +26,7 @@
     "zod": "3.21.4"
   },
   "devDependencies": {
-    "@pharmacy-crud/eslint-config-frontend": "workspace:*",
+    "@pharmacy-crud/eslint-config": "workspace:*",
     "@pharmacy-crud/tsconfig-frontend": "workspace:*",
     "@tanstack/react-query-devtools": "4.29.12",
     "@types/node": "20.2.5",
