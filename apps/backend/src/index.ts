@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import { addProduct } from "@actions/post";
-import { ProductCreateOneSchema } from "@pharmacy-crud/dto";
 import "dotenv/config";
 import cors from "cors";
 import { getProducts } from "@actions/get";
@@ -28,14 +27,12 @@ app.get("/v1/get-products", async (_request: Request, response: Response) => {
   }
 });
 
-app.post("/v1/add-product", async (request: Request, response: Response) => {
+app.post("/v1/add-product", async ({ body }: Request, response: Response) => {
   try {
-    const { data } = await ProductCreateOneSchema.parse(request.body);
-
-    await addProduct(data);
+    await addProduct(body);
 
     response.status(200).json({
-      data,
+      body,
     });
   } catch (error) {
     response.status(400).json({ message: error });
