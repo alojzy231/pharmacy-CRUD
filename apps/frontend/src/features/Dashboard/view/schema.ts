@@ -1,4 +1,3 @@
-import { ProductCategorySchema, ProductTypeSchema } from '@pharmacy-crud/dto';
 import z from 'zod';
 
 export const schema = z.object({

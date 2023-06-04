@@ -1,6 +1,3 @@
-import z from "zod";
-import { ProductOrderByWithRelationInputObjectSchema } from "@schemas/objects/ProductOrderByWithRelationInput.schema";
+import { type Product } from "@pharmacy-crud/prisma-client";
 
-export type GetProductsResultDTO = z.infer<
-  typeof ProductOrderByWithRelationInputObjectSchema
->[];
+export type GetProductsResultDTO = Product[];
