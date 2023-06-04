@@ -1,5 +1,6 @@
 module.exports = {
   extends: [
+    "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/recommended",
     "plugin:sonarjs/recommended",
@@ -12,6 +13,10 @@ module.exports = {
         "@typescript-eslint/no-var-requires": "off",
         "unicorn/prefer-module": "off",
       },
+    },
+    {
+      extends: ["plugin:testing-library/react", "plugin:jest-dom/recommended"],
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
     },
     {
       files: ["next-env.d.ts", "environment.d.ts"],
@@ -39,6 +44,7 @@ module.exports = {
           ["sibling", "index"],
         ],
         "newlines-between": "always",
+        pathGroupsExcludedImportTypes: ["react"],
       },
     ],
     "padding-line-between-statements": [
@@ -50,6 +56,10 @@ module.exports = {
         next: ["const", "let", "var"],
         prev: ["const", "let", "var"],
       },
+    ],
+    "react/function-component-definition": [
+      2,
+      { namedComponents: "function-declaration" },
     ],
     "sort-destructure-keys/sort-destructure-keys": "error",
     "sort-keys-fix/sort-keys-fix": "error",
