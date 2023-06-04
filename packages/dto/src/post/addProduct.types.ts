@@ -1,5 +1,4 @@
-import z from 'zod';
+import { Prisma } from "@pharmacy-crud/prisma-client";
 
-import { ProductCreateInputObjectSchema } from "@schemas/objects/ProductCreateInput.schema";
-
-export type AddProductDTO = z.infer<typeof ProductCreateInputObjectSchema>
+export type AddProductResultDTO = Prisma.ProductCreateInput;
+export type AddProductArgumentsDTO = Prisma.ProductCreateInput;

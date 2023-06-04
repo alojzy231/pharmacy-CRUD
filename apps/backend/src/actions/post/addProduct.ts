@@ -1,7 +1,6 @@
-import { AddProductDTO } from "@pharmacy-crud/dto";
-import { prismaClient } from "@pharmacy-crud/prisma-client";
+import { prismaClient, Prisma } from "@pharmacy-crud/prisma-client";
 
-export async function addProduct(data: AddProductDTO) {
+export async function addProduct(data: Prisma.ProductCreateInput) {
   try {
     await prismaClient.product.upsert({
       create: data,

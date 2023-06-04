@@ -1,4 +1,4 @@
-import { AddProductDTO, GetProductsResultDTO } from '@pharmacy-crud/dto';
+import { Prisma, Product } from '@pharmacy-crud/prisma-client';
 import { AxiosResponse } from 'axios';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
@@ -8,11 +8,11 @@ class ProductService extends PharmacyCRUDClientApiClient {
     super();
   }
 
-  addProduct(data: AddProductDTO) {
-    return this.api.post<AddProductDTO>('/add-product', { data });
+  addProduct(data: Prisma.ProductCreateInput) {
+    return this.api.post<Prisma.ProductCreateInput>('/add-product', { data });
   }
   getProducts() {
-    return this.api.get<AxiosResponse<GetProductsResultDTO>>('/get-products');
+    return this.api.get<AxiosResponse<Product>>('/get-products');
   }
 }
 

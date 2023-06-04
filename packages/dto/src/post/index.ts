@@ -1,1 +1,1 @@
-export * from './addProduct.types';
+export * from "./addProduct.types";
