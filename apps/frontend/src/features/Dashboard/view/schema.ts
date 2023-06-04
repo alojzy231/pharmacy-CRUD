@@ -1,23 +1,23 @@
+import { ProductCategory, ProductType } from '@pharmacy-crud/dto';
 import z from 'zod';
 
 export const schema = z.object({
-  category: ProductCategorySchema,
+  category: z.nativeEnum(ProductCategory),
   isPrescriptionNeeded: z.boolean(),
   name: z.string().min(1),
   price: z.number(),
   quantity: z.number(),
-  type: ProductTypeSchema,
+  type: z.nativeEnum(ProductType),
 });
 
 export type FieldValues = z.infer<typeof schema>;
 
-const optionalFieldsSchema = z.object({
-  category: ProductCategorySchema.optional(),
-  type: ProductTypeSchema.optional(),
-});
+type DefaultValues = Omit<FieldValues, 'category' | 'type'> & {
+  category: ProductCategory | undefined;
+  type: ProductType | undefined;
+};
 
-export const defaultValues: Omit<FieldValues, 'category' | 'type'> &
-  z.infer<typeof optionalFieldsSchema> = {
+export const defaultValues: DefaultValues = {
   category: undefined,
   isPrescriptionNeeded: false,
   name: '',

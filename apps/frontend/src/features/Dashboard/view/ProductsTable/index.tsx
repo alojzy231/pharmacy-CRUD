@@ -1,5 +1,4 @@
 import { Table, TableProps } from '@mantine/core';
-import { GetProductsResultDTO } from '@pharmacy-crud/dto';
 import {
   createColumnHelper,
   flexRender,
@@ -7,7 +6,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-type Product = GetProductsResultDTO[0];
+import { UseGetProductsResult } from '@features/Dashboard/api/queries/useGetProducts';
+
+type Product = UseGetProductsResult[0];
 
 const columnHelper = createColumnHelper<Product>();
 
@@ -43,7 +44,7 @@ const columns = [
 ];
 
 type ProductsTableProps = TableProps & {
-  data: GetProductsResultDTO;
+  data: UseGetProductsResult;
 };
 
 export function ProductsTable({ data, ...restProps }: ProductsTableProps): JSX.Element {

@@ -28,6 +28,9 @@ importers:
 
   apps/backend:
     dependencies:
+      '@pharmacy-crud/dto':
+        specifier: workspace:*
+        version: link:../../packages/dto
       '@pharmacy-crud/prisma-client':
         specifier: workspace:*
         version: link:../../packages/prisma-client
@@ -53,9 +56,6 @@ importers:
         specifier: 3.21.4
         version: 3.21.4
     devDependencies:
-      '@pharmacy-crud/dto':
-        specifier: workspace:*
-        version: link:../../packages/dto
       '@tsconfig/node16':
         specifier: 1.0.4
         version: 1.0.4
@@ -98,6 +98,9 @@ importers:
       '@mantine/next':
         specifier: 6.0.13
         version: 6.0.13(@emotion/react@11.11.0)(@emotion/server@11.11.0)(next@13.4.4)(react-dom@18.2.0)(react@18.2.0)
+      '@pharmacy-crud/dto':
+        specifier: workspace:*
+        version: link:../../packages/dto
       '@pharmacy-crud/prisma-client':
         specifier: workspace:*
         version: link:../../packages/prisma-client

@@ -15,16 +15,15 @@ const getProducts = async () => {
   return data?.data;
 };
 
-export type UseGetProductsResult = Omit<GetProductsResultDTO[0], 'category' | 'type'> &
-  {
-    category: string;
-    type: string;
-  }[];
+export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | 'type'> & {
+  category: string;
+  type: string;
+})[];
 
 function select(data: GetProductsResultDTO): UseGetProductsResult {
   if (data === undefined) return data;
 
-  return data.map((product: GetProductsResultDTO[0]): UseGetProductsResult[0] => ({
+  return data.map((product) => ({
     ...product,
     category: convertEnumToString(product.category),
     type: convertEnumToString(product.type),

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Container, Stack } from '@mantine/core';
-import { AddProductDTO } from '@pharmacy-crud/dto';
+import { AddProductArgumentsDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -25,7 +25,7 @@ export function MainView(): JSX.Element {
   const { mutateAsync: addProduct } = useAddProduct();
   const { data } = useGetProducts();
 
-  const onSubmit = async (data: AddProductDTO) => {
+  const onSubmit = async (data: AddProductArgumentsDTO) => {
     try {
       await addProduct(data);
 
