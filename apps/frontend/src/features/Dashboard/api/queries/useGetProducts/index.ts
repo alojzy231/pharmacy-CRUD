@@ -15,9 +15,10 @@ const getProducts = async () => {
   return data?.data;
 };
 
-export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | 'type'> & {
+export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | 'type' | 'price'> & {
   category: string;
   type: string;
+  price: string;
 })[];
 
 const formatToDollars = new Intl.NumberFormat('en-US', {
