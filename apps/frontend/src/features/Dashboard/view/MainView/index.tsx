@@ -11,9 +11,9 @@ import {
 } from '@components/ControlledInputs';
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
-import { CATEGORIES, TYPES } from '@features/Dashboard/view/const';
-import { ProductsTable } from '@features/Dashboard/view/ProductsTable';
 
+import { CATEGORIES, TYPES } from './const';
+import { ProductsTable } from './ProductsTable';
 import { defaultValues, FieldValues, schema } from './schema';
 
 export function MainView(): JSX.Element {
