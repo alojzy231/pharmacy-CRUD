@@ -5,11 +5,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator zod {
-  provider = "prisma-zod-generator"
-  output   = "../../../packages/dto/prisma"
-}
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
