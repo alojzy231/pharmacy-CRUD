@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Container, Stack, Title } from '@mantine/core';
+import { Box, Button, Stack, Title } from '@mantine/core';
 import { AddProductArgumentsDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
@@ -36,7 +36,7 @@ export function MainView(): JSX.Element {
   };
 
   return (
-    <Container p={24} sx={{ display: 'flex', flexDirection: 'column' }}>
+    <>
       <Title mx="auto">Home</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack maw={320} mt={64} mx="auto" spacing={24}>
@@ -92,6 +92,6 @@ export function MainView(): JSX.Element {
         </Stack>
       </form>
       <Box mt={32}>{data ? <ProductsTable data={data} /> : 'Loading...'}</Box>
-    </Container>
+    </>
   );
 }

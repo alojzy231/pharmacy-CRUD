@@ -2,8 +2,8 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import "dotenv/config";
 
-import { getProducts } from "@actions/get";
-import { addProduct } from "@actions/post";
+import { getHospitals, getProducts } from "@actions/get";
+import { addHospital, addProduct } from "@actions/post";
 
 const PORT = process.env.PORT;
 
@@ -31,6 +31,30 @@ app.get("/v1/get-products", async (_request: Request, response: Response) => {
 app.post("/v1/add-product", async ({ body }: Request, response: Response) => {
   try {
     await addProduct(body.data);
+
+    response.status(200).json({
+      body,
+    });
+  } catch (error) {
+    response.status(400).json({ message: error });
+  }
+});
+
+app.get("/v1/get-hospitals", async (_request: Request, response: Response) => {
+  try {
+    const result = await getHospitals();
+
+    response.status(200).json({
+      data: result,
+    });
+  } catch (error) {
+    response.status(400).json({ message: error });
+  }
+});
+
+app.post("/v1/add-hospital", async ({ body }: Request, response: Response) => {
+  try {
+    await addHospital(body.data);
 
     response.status(200).json({
       body,
