@@ -4,10 +4,10 @@ import { AddHospitalArgumentsDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
 import { ControlledTextInput } from '@components/ControlledInputs';
-import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
-import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
+import { useAddHospital } from '@features/Dashboard/api/mutations/useAddHospital';
+import { useGetHospitals } from '@features/Dashboard/api/queries/useGetHospitals';
 
-import { ProductsTable } from './ProductsTable';
+import { HospitalsTable } from './HospitalsTable';
 import { defaultValues, FieldValues, schema } from './schema';
 
 export function HospitalView(): JSX.Element {
@@ -16,12 +16,12 @@ export function HospitalView(): JSX.Element {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync: addProduct } = useAddProduct();
-  const { data } = useGetProducts();
+  const { mutateAsync: addHospital } = useAddHospital();
+  const { data } = useGetHospitals();
 
   const onSubmit = async (data: AddHospitalArgumentsDTO) => {
     try {
-      await addProduct(data);
+      await addHospital(data);
 
       reset();
     } catch (error) {
@@ -57,7 +57,7 @@ export function HospitalView(): JSX.Element {
           </Button>
         </Stack>
       </form>
-      <Box mt={32}>{data ? <ProductsTable data={data} /> : 'Loading...'}</Box>
+      <Box mt={32}>{data ? <HospitalsTable data={data} /> : 'Loading...'}</Box>
     </>
   );
 }

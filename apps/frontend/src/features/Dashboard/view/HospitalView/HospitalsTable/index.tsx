@@ -1,4 +1,5 @@
 import { Table, TableProps } from '@mantine/core';
+import { GetHospitalsResultDTO } from '@pharmacy-crud/dto';
 import {
   createColumnHelper,
   flexRender,
@@ -6,11 +7,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { UseGetProductsResult } from '@features/Dashboard/api/queries/useGetProducts';
+type Hospital = GetHospitalsResultDTO[0];
 
-type Product = UseGetProductsResult[0];
-
-const columnHelper = createColumnHelper<Product>();
+const columnHelper = createColumnHelper<Hospital>();
 
 const columns = [
   columnHelper.accessor('id', {
@@ -21,33 +20,21 @@ const columns = [
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,
   }),
-  columnHelper.accessor('price', {
+  columnHelper.accessor('city', {
     cell: (info) => info.getValue(),
-    header: () => <span>Price</span>,
+    header: () => <span>City</span>,
   }),
-  columnHelper.accessor('quantity', {
+  columnHelper.accessor('streetName', {
     cell: (info) => info.getValue(),
-    header: () => <span>Quantity</span>,
-  }),
-  columnHelper.accessor('isPrescriptionNeeded', {
-    cell: (info) => (info.getValue() ? 'yes' : 'no'),
-    header: () => <span>On prescription</span>,
-  }),
-  columnHelper.accessor('type', {
-    cell: (info) => info.getValue(),
-    header: () => <span>Type</span>,
-  }),
-  columnHelper.accessor('category', {
-    cell: (info) => info.getValue(),
-    header: () => <span>Category</span>,
+    header: () => <span>Street name</span>,
   }),
 ];
 
-type ProductsTableProps = TableProps & {
-  data: UseGetProductsResult;
+type HospitalTableProps = TableProps & {
+  data: GetHospitalsResultDTO;
 };
 
-export function ProductsTable({ data, ...restProps }: ProductsTableProps): JSX.Element {
+export function HospitalsTable({ data, ...restProps }: HospitalTableProps): JSX.Element {
   const table = useReactTable({
     columns,
     data,
