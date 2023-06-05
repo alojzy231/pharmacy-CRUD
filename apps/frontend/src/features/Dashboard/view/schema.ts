@@ -5,8 +5,8 @@ export const schema = z.object({
   category: z.nativeEnum(ProductCategory),
   isPrescriptionNeeded: z.boolean(),
   name: z.string().min(1),
-  price: z.number(),
-  quantity: z.number(),
+  price: z.number().min(0.1),
+  quantity: z.number().min(1).step(1),
   type: z.nativeEnum(ProductType),
 });
 
@@ -22,6 +22,6 @@ export const defaultValues: DefaultValues = {
   isPrescriptionNeeded: false,
   name: '',
   price: 0,
-  quantity: 0,
+  quantity: 1,
   type: undefined,
 };

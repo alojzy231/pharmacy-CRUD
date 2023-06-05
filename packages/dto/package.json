@@ -9,9 +9,7 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup",
-    "clean": "rimraf .turbo node_modules dist",
-    "dev": "tsup"
+    "build": "tsup"
   },
   "dependencies": {
     "@pharmacy-crud/prisma-client": "workspace:*"

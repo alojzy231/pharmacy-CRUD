@@ -29,6 +29,8 @@ module.exports = {
           { group: "internal", pattern: "@api/**" },
           { group: "internal", pattern: "@features/**" },
           { group: "internal", pattern: "@components/**" },
+          { group: "internal", pattern: "@const/**" },
+          { group: "internal", pattern: "@layout/**" },
         ],
         pathGroupsExcludedImportTypes: ["react"],
       },

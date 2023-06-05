@@ -15,7 +15,6 @@
     "predb:migrate:dev": "npm run clean",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
-    "dev": "tsup",
     "format": "prisma format",
     "generate": "prisma generate",
     "prebuild": "npm run generate",

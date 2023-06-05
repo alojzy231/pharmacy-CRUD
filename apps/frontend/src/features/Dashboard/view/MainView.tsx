@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Button, Container, Stack } from '@mantine/core';
+import { Box, Button, Container, Stack, Title } from '@mantine/core';
 import { AddProductArgumentsDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
@@ -36,14 +36,51 @@ export function MainView(): JSX.Element {
   };
 
   return (
-    <Container>
+    <Container p={24} sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Title mx="auto">Home</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack maw={320} mt={64} mx="auto" spacing={24}>
-          <ControlledTextInput control={control} label="Name" name="name" />
-          <ControlledSelect control={control} data={TYPES} label="Type" name="type" />
-          <ControlledSelect control={control} data={CATEGORIES} label="Category" name="category" />
-          <ControlledNumberInput control={control} label="Quantity" name="quantity" />
-          <ControlledNumberInput control={control} label="Price" name="price" />
+          <ControlledTextInput
+            control={control}
+            label="Name"
+            name="name"
+            placeholder="Name of the drug"
+          />
+          <ControlledSelect
+            control={control}
+            data={TYPES}
+            label="Type"
+            name="type"
+            placeholder="Type of the drug"
+          />
+          <ControlledSelect
+            control={control}
+            data={CATEGORIES}
+            label="Category"
+            name="category"
+            placeholder="Category of the type"
+          />
+          <ControlledNumberInput
+            control={control}
+            label="Quantity"
+            min={1}
+            name="quantity"
+            placeholder="Quantity of the drug"
+          />
+          <ControlledNumberInput
+            control={control}
+            formatter={(value) =>
+              Number.isNaN(Number.parseFloat(value))
+                ? '$ '
+                : `$ ${value}`.replaceAll(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+            }
+            label="Price"
+            name="price"
+            parser={(value) => value.replaceAll(/\$\s?|(,*)/g, '')}
+            placeholder="Price of the drug"
+            precision={2}
+            step={0.01}
+          />
           <ControlledCheckbox
             control={control}
             label="Prescription needed"

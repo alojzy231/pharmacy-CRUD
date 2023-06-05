@@ -20,12 +20,18 @@ export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | '
   type: string;
 })[];
 
+const formatToDollars = new Intl.NumberFormat('en-US', {
+  currency: 'USD',
+  style: 'currency',
+}).format;
+
 function select(data: GetProductsResultDTO): UseGetProductsResult {
   if (data === undefined) return data;
 
   return data.map((product) => ({
     ...product,
     category: convertEnumToString(product.category),
+    price: formatToDollars(product.price),
     type: convertEnumToString(product.type),
   }));
 }

@@ -5,6 +5,8 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ReactNode, useState } from 'react';
 
+import { AppShell } from '@layout/AppShell';
+
 function App({ Component, pageProps }: AppProps): ReactNode {
   const [queryClient] = useState(() => new QueryClient());
 
@@ -16,7 +18,9 @@ function App({ Component, pageProps }: AppProps): ReactNode {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
-            <Component {...pageProps} />
+            <AppShell>
+              <Component {...pageProps} />
+            </AppShell>
           </MantineProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </Hydrate>

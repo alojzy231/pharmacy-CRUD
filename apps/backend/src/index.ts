@@ -30,7 +30,7 @@ app.get("/v1/get-products", async (_request: Request, response: Response) => {
 
 app.post("/v1/add-product", async ({ body }: Request, response: Response) => {
   try {
-    await addProduct(body);
+    await addProduct(body.data);
 
     response.status(200).json({
       body,
