@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@actions/*": ["src/actions/*"],
+      "@prismaClient": ["src/prismaClient/index.ts"],
     }
   },
   "include": ["src/**/*"],

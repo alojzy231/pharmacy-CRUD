@@ -1,5 +1,6 @@
 import { AddProductArgumentsDTO } from "@pharmacy-crud/dto";
-import { prismaClient } from "@pharmacy-crud/prisma-client";
+
+import { prismaClient } from "@prismaClient";
 
 export async function addProduct(data: AddProductArgumentsDTO): Promise<void> {
   try {

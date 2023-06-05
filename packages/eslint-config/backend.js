@@ -13,7 +13,10 @@ module.exports = {
           ["sibling", "index"],
         ],
         "newlines-between": "always",
-        pathGroups: [{ group: "internal", pattern: "@actions/**" }],
+        pathGroups: [
+          { group: "internal", pattern: "@actions/**" },
+          { group: "internal", pattern: "@prismaClient" },
+        ],
         pathGroupsExcludedImportTypes: ["react"],
       },
     ],
