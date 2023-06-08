@@ -1,7 +1,7 @@
 import { Select, SelectProps } from '@mantine/core';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
-interface ControlledSelectInputProps<TFieldValues extends FieldValues>
+export interface ControlledSelectInputProps<TFieldValues extends FieldValues>
   extends Omit<SelectProps, 'error'> {
   name: Path<TFieldValues>;
   control: Control<TFieldValues>;
