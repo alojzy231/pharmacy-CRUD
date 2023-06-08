@@ -1,31 +1,28 @@
-import { Autocomplete } from '@mantine/core';
-import { useDeferredValue, useEffect, useState } from 'react';
+import { Box, TextInput } from '@mantine/core';
+import { spotlight, SpotlightProvider } from '@mantine/spotlight';
+import { useEffect } from 'react';
 
-import { useSearch } from './useSearch';
+import { useGetAll } from './useGetAll';
 
 export default function SearchBar(): JSX.Element {
-  const [query, setQuery] = useState('');
-  const deferredQuery = useDeferredValue(query);
-  const { data, isLoading, mutateAsync: search } = useSearch();
-
-  useEffect(() => {
-    if (!isLoading && !!deferredQuery) {
-      search({ query: deferredQuery });
-    }
-  }, [deferredQuery]);
+  const { data } = useGetAll();
 
   useEffect(() => {
     console.log(data);
   }, [data]);
 
+  if (data === undefined) return <Box w={212}>Loading...</Box>;
+
   return (
-    <Autocomplete
-      data={data ?? [{ group: 'loading', label: 'Loading...', value: 'loading' }]}
-      mr={12}
-      my="auto"
-      onChange={setQuery}
-      placeholder="Search"
-      w={200}
-    />
+    <SpotlightProvider
+      actions={data}
+      nothingFoundMessage="Nothing found..."
+      searchPlaceholder="Search..."
+      shortcut="mod + shift + 1"
+    >
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/*@ts-ignore*/}
+      <TextInput mr={12} my="auto" onClick={spotlight.open} placeholder="Search" w={200} />;
+    </SpotlightProvider>
   );
 }

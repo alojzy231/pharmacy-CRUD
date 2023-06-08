@@ -37,6 +37,9 @@ importers:
       '@mantine/next':
         specifier: 6.0.13
         version: 6.0.13(@emotion/react@11.11.0)(@emotion/server@11.11.0)(next@13.4.4)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/spotlight':
+        specifier: 6.0.13
+        version: 6.0.13(@mantine/core@6.0.13)(@mantine/hooks@6.0.13)(react-dom@18.2.0)(react@18.2.0)
       '@prisma/client':
         specifier: 4.15.0
         version: 4.15.0(prisma@4.15.0)
@@ -601,6 +604,21 @@ packages:
     transitivePeerDependencies:
       - '@emotion/react'
       - '@emotion/server'
+    dev: false
+
+  /@mantine/spotlight@6.0.13(@mantine/core@6.0.13)(@mantine/hooks@6.0.13)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-HVpQRmE7pZxK9JWnX8G24KsrE2U/mgn5NF0MPbHNGbI5fbDjzW5rVDL7GvsgEHsWHXAhPeXci20sY+2v6573SA==}
+    peerDependencies:
+      '@mantine/core': 6.0.13
+      '@mantine/hooks': 6.0.13
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 6.0.13(@emotion/react@11.11.0)(@mantine/hooks@6.0.13)(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 6.0.13(react@18.2.0)
+      '@mantine/utils': 6.0.13(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@mantine/ssr@6.0.13(@emotion/react@11.11.0)(@emotion/server@11.11.0)(react-dom@18.2.0)(react@18.2.0):

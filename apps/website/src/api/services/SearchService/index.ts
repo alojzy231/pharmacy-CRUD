@@ -1,5 +1,4 @@
-import { SearchArgumentsDTO, SearchResultDTO } from '@dto';
-import { AxiosResponse } from 'axios';
+import { SearchResultDTO } from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
@@ -8,8 +7,8 @@ class SearchService extends PharmacyCRUDClientApiClient {
     super();
   }
 
-  search(data: SearchArgumentsDTO) {
-    return this.api.post<SearchArgumentsDTO, AxiosResponse<SearchResultDTO>>(`/search`, { data });
+  getAll() {
+    return this.api.get<SearchResultDTO>(`/get-all`);
   }
 }
 
