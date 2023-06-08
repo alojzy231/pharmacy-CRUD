@@ -44,6 +44,7 @@ const columns = [
   }),
   columnHelper.accessor('id', {
     cell: (info) => <RemoveCell id={info.getValue()} />,
+    header: () => <span />,
   }),
 ];
 

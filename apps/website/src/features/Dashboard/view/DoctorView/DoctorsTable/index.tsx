@@ -7,6 +7,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
+import { RemoveCell } from './components/RemoveCell';
+
 type Hospital = GetDoctorsResultDTO[0];
 
 const columnHelper = createColumnHelper<Hospital>();
@@ -31,6 +33,10 @@ const columns = [
   columnHelper.accessor('hospital.name', {
     cell: (info) => info.getValue(),
     header: () => <span>Hospital name</span>,
+  }),
+  columnHelper.accessor('id', {
+    cell: (info) => <RemoveCell id={info.getValue()} />,
+    header: () => <span />,
   }),
 ];
 

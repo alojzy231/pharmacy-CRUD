@@ -1,19 +1,19 @@
 import { prismaClient } from '@config/prismaClient';
-import { DeleteProductArgumentsDTO, GetProductsResultDTO } from '@dto';
+import { GetProductsResultDTO } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function deleteProduct(
+export default async function deleteDoctor(
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void | NextApiResponse<GetProductsResultDTO>> {
   if (request.method !== 'DELETE') return response.status(405).end();
 
-  const { data }: { data: DeleteProductArgumentsDTO } = request.body;
+  const { id } = request.query;
 
   try {
-    await prismaClient.product.delete({
+    await prismaClient.doctor.delete({
       where: {
-        id: data.id,
+        id: Number(id),
       },
     });
 
@@ -23,8 +23,8 @@ export default async function deleteProduct(
   } catch (error) {
     prismaClient.$disconnect();
 
-    console.error(`Error deleting a product: ${error}`);
+    console.error(`Error deleting a doctor: ${error}`);
 
-    return response.status(500).json({ error, message: 'Error deleting a product' });
+    return response.status(500).json({ error, message: 'Error deleting a doctor' });
   }
 }
