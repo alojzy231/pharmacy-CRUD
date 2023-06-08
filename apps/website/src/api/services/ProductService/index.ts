@@ -1,12 +1,15 @@
-import { AxiosResponse } from 'axios';
-
-import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 import {
   AddHospitalArgumentsDTO,
   AddProductArgumentsDTO,
   GetHospitalsResultDTO,
   GetProductsResultDTO,
 } from '@dto';
+import { AxiosResponse } from 'axios';
+
+import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
+
+import { GetDoctorsResultDTO } from '../../../dto/get/getDoctors.types';
+import { AddDoctorArgumentsDTO } from '../../../dto/post/addDoctor.types';
 
 class ProductService extends PharmacyCRUDClientApiClient {
   constructor() {
@@ -24,6 +27,12 @@ class ProductService extends PharmacyCRUDClientApiClient {
   }
   getHospitals() {
     return this.api.get<AxiosResponse<GetHospitalsResultDTO>>('/get-hospitals');
+  }
+  addDoctor(data: AddHospitalArgumentsDTO) {
+    return this.api.post<AddDoctorArgumentsDTO>('/add-doctor', { data });
+  }
+  getDoctors() {
+    return this.api.get<AxiosResponse<GetDoctorsResultDTO>>('/get-doctors');
   }
 }
 
