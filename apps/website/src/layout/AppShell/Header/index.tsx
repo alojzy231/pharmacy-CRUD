@@ -3,11 +3,18 @@ import {
   Header as MantineHeader,
   Group,
   createStyles,
+  Box,
 } from '@mantine/core';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
-import { ReactElement } from 'react';
+import { ReactElement, Suspense } from 'react';
 
 import { Route } from '@const/route';
+
+const SearchBar = dynamic(() => import('./SearchBar'), {
+  loading: () => <Box w={212} />,
+  ssr: false,
+});
 
 const ROUTES = [
   { href: Route.Dashboard, label: 'Home' },
@@ -32,6 +39,7 @@ export function Header(props: HeaderProps): ReactElement {
 
   return (
     <MantineHeader display="flex" height={60} {...props}>
+      <Box w={212} />
       <Group m="auto" spacing={32}>
         {ROUTES.map(({ href, label }) => (
           <NextLink className={classes.link} href={href} key={href}>
@@ -39,6 +47,9 @@ export function Header(props: HeaderProps): ReactElement {
           </NextLink>
         ))}
       </Group>
+      <Suspense>
+        <SearchBar />
+      </Suspense>
     </MantineHeader>
   );
 }

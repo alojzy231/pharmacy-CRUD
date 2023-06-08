@@ -1,9 +1,11 @@
 import { type Doctor, type Hospital, type Product } from '@prisma/client';
 
 export type SearchArgumentsDTO = {
-  searchPhrase: string;
+  query: string;
 };
 
-type TYPE = 'doctor' | 'hospital' | 'product';
-
-export type SearchResultDTO = ((Product | Doctor | Hospital) & { type: TYPE })[];
+export type SearchResultDTO = {
+  product: Product[];
+  hospital: Hospital[];
+  doctor: Doctor[];
+};
