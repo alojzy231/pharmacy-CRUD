@@ -17,6 +17,9 @@
     "db:migrate:dev": {
       "outputs": []
     },
+    "generate": {
+      "outputs": []
+    },
     "lint": {
       "outputs": []
     },
