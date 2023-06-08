@@ -14,7 +14,7 @@ class ProductService extends PharmacyCRUDClientApiClient {
     return this.api.get<GetProductsResultDTO>('/get-products');
   }
   deleteProduct(data: DeleteProductArgumentsDTO) {
-    return this.api.delete<DeleteProductArgumentsDTO>('/delete-products', { data });
+    return this.api.delete<DeleteProductArgumentsDTO>(`/delete-product/${data.id}`);
   }
 }
 

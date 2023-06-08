@@ -1,8 +1,10 @@
-import { Button, ButtonProps } from '@mantine/core';
+import { Button } from '@mantine/core';
 
-export function RemoveButton(
-  props: Omit<ButtonProps, 'gradient' | 'variant' | 'size'>
-): JSX.Element {
+type RemoveButtonProps = {
+  onClick: () => void;
+};
+
+export function RemoveButton(props: RemoveButtonProps): JSX.Element {
   return (
     <Button gradient={{ from: 'orange', to: 'red' }} size="xs" variant="gradient" {...props}>
       Remove
