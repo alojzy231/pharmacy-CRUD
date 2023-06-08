@@ -20,6 +20,6 @@ export default async function getHospitals(
 
     console.error(`Error getting all hospitals: ${error}`);
 
-    return response.status(500).json({ error, message: 'Error getting all products' });
+    return response.status(500).json({ error, message: 'Error getting all hospitals' });
   }
 }
