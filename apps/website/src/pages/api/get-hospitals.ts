@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { prismaClient } from '@config/prismaClient';
-import { GetProductsResultDTO } from '@dto';
+import { GetHospitalsResultDTO } from '@dto';
 
-export default async function getProducts(
+export default async function getHospitals(
   request: NextApiRequest,
   response: NextApiResponse
-): Promise<void | NextApiResponse<GetProductsResultDTO>> {
+): Promise<void | NextApiResponse<GetHospitalsResultDTO>> {
   if (request.method !== 'GET') return response.status(405).end();
 
   try {
-    const data = await prismaClient.product.findMany();
+    const data = await prismaClient.hospital.findMany();
 
     prismaClient.$disconnect();
 
@@ -18,7 +18,7 @@ export default async function getProducts(
   } catch (error) {
     prismaClient.$disconnect();
 
-    console.error(`Error getting all products: ${error}`);
+    console.error(`Error getting all hospitals: ${error}`);
 
     return response.status(500).json({ error, message: 'Error getting all products' });
   }
