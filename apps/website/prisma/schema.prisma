@@ -54,4 +54,5 @@ model Hospital {
   name       String @unique
   city       String
   streetName String
+  address    String
 }

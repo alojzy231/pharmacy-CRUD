@@ -1,3 +1,4 @@
+import { GetHospitalsResultDTO } from '@dto';
 import { Table, TableProps } from '@mantine/core';
 import {
   createColumnHelper,
@@ -6,9 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { GetHospitalsResultDTO } from '@dto';
-
-type Hospital = GetHospitalsResultDTO[0];
+type Hospital = GetHospitalsResultDTO['data'][0];
 
 const columnHelper = createColumnHelper<Hospital>();
 
@@ -29,10 +28,14 @@ const columns = [
     cell: (info) => info.getValue(),
     header: () => <span>Street name</span>,
   }),
+  columnHelper.accessor('address', {
+    cell: (info) => info.getValue(),
+    header: () => <span>Address</span>,
+  }),
 ];
 
 type HospitalTableProps = TableProps & {
-  data: GetHospitalsResultDTO;
+  data: GetHospitalsResultDTO['data'];
 };
 
 export function HospitalsTable({ data, ...restProps }: HospitalTableProps): JSX.Element {

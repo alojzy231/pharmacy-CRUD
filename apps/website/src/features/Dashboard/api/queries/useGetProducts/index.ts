@@ -1,8 +1,8 @@
+import { GetProductsResultDTO } from '@dto';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { convertEnumToString } from '@utils/convertEnumToString';
 
 import { productService } from '@api/services/ProductService';
-import { GetProductsResultDTO } from '@dto';
-import { convertEnumToString } from '@utils/convertEnumToString';
 
 export const productsKey = {
   all: ['products'] as const,
@@ -15,7 +15,10 @@ const getProducts = async () => {
   return data?.data;
 };
 
-export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | 'type' | 'price'> & {
+export type UseGetProductsResult = (Omit<
+  GetProductsResultDTO['data'][0],
+  'category' | 'type' | 'price'
+> & {
   category: string;
   type: string;
   price: string;
@@ -26,7 +29,7 @@ const formatToDollars = new Intl.NumberFormat('en-US', {
   style: 'currency',
 }).format;
 
-function select(data: GetProductsResultDTO): UseGetProductsResult {
+function select({ data }: GetProductsResultDTO): UseGetProductsResult {
   if (data === undefined) return data;
 
   return data.map((product) => ({

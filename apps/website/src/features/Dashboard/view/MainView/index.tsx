@@ -1,3 +1,4 @@
+import { AddProductArgumentsDTO } from '@dto';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Title } from '@mantine/core';
 import { useForm } from 'react-hook-form';
@@ -8,7 +9,6 @@ import {
   ControlledSelect,
   ControlledTextInput,
 } from '@components/ControlledInputs';
-import { AddProductArgumentsDTO } from '@dto';
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
 
