@@ -1,0 +1,15 @@
+-- CreateTable
+CREATE TABLE `Doctor` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `lastName` VARCHAR(191) NOT NULL,
+    `address` VARCHAR(191) NOT NULL,
+    `profession` ENUM('DERMATOLOGIST', 'PEDIATRICIAN', 'OPHTHALMOLOGIST', 'CARDIOLOGIST', 'NEUROLOGIST', 'PSYCHIATRIST', 'SURGEON', 'GYNECOLOGIST', 'UROLOGIST', 'OTHER') NOT NULL,
+    `hospitalId` INTEGER NOT NULL,
+
+    UNIQUE INDEX `Doctor_name_key`(`name`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `Doctor` ADD CONSTRAINT `Doctor_hospitalId_fkey` FOREIGN KEY (`hospitalId`) REFERENCES `Hospital`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

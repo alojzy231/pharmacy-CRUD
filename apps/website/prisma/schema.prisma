@@ -50,9 +50,33 @@ model Product {
 }
 
 model Hospital {
-  id         Int    @id @default(autoincrement())
-  name       String @unique
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
   city       String
   streetName String
   address    String
+  Doctor     Doctor[]
+}
+
+enum Profession {
+  DERMATOLOGIST
+  PEDIATRICIAN
+  OPHTHALMOLOGIST
+  CARDIOLOGIST
+  NEUROLOGIST
+  PSYCHIATRIST
+  SURGEON
+  GYNECOLOGIST
+  UROLOGIST
+  OTHER
+}
+
+model Doctor {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  lastName   String
+  hospital   Hospital   @relation(fields: [hospitalId], references: [id])
+  address    String
+  profession Profession
+  hospitalId Int
 }
