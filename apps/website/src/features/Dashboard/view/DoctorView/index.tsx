@@ -3,9 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Title } from '@mantine/core';
 import { useForm } from 'react-hook-form';
 
-import { ControlledTextInput } from '@components/ControlledInputs';
+import { ControlledSelect, ControlledTextInput } from '@components/ControlledInputs';
 import { useAddDoctor } from '@features/Dashboard/api/mutations/useAddDoctor';
 import { useGetDoctors } from '@features/Dashboard/api/queries/useGetDoctors';
+import { PROFESSIONS } from '@features/Dashboard/view/DoctorView/const';
 
 import { DoctorsTable } from './DoctorsTable';
 import { defaultValues, FieldValues, schema } from './schema';
@@ -46,7 +47,13 @@ export function DoctorView(): JSX.Element {
             name="lastName"
             placeholder="Last name of the doctor"
           />
-
+          <ControlledSelect
+            control={control}
+            data={PROFESSIONS}
+            label="Profession"
+            name="profession"
+            placeholder="Profession of the doctor"
+          />
           <Button fullWidth type="submit">
             Submit
           </Button>
