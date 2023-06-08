@@ -2,7 +2,7 @@ import { Profession } from '@dto';
 import z from 'zod';
 
 export const schema = z.object({
-  hospitalId: z.number(),
+  hospitalId: z.string().min(1),
   lastName: z.string().min(1),
   name: z.string().min(1),
   profession: z.nativeEnum(Profession),
