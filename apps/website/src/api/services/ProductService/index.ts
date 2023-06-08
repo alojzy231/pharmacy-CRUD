@@ -1,11 +1,4 @@
-import {
-  AddHospitalArgumentsDTO,
-  AddProductArgumentsDTO,
-  GetHospitalsResultDTO,
-  GetProductsResultDTO,
-  GetDoctorsResultDTO,
-  AddDoctorArgumentsDTO,
-} from '@dto';
+import { AddProductArgumentsDTO, GetProductsResultDTO } from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
@@ -19,18 +12,6 @@ class ProductService extends PharmacyCRUDClientApiClient {
   }
   getProducts() {
     return this.api.get<GetProductsResultDTO>('/get-products');
-  }
-  addHospital(data: AddHospitalArgumentsDTO) {
-    return this.api.post<AddHospitalArgumentsDTO>('/add-hospital', { data });
-  }
-  getHospitals() {
-    return this.api.get<GetHospitalsResultDTO>('/get-hospitals');
-  }
-  addDoctor(data: AddDoctorArgumentsDTO) {
-    return this.api.post<AddDoctorArgumentsDTO>('/add-doctor', { data });
-  }
-  getDoctors() {
-    return this.api.get<GetDoctorsResultDTO>('/get-doctors');
   }
 }
 

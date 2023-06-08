@@ -1,12 +1,12 @@
+import { AddHospitalArgumentsDTO } from '@dto';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UseMutationResult } from '@tanstack/react-query/src/types';
 
-import { productService } from '@api/services/ProductService';
-import { AddHospitalArgumentsDTO } from '@dto';
+import { hospitalService } from '@api/services/HospitalService';
 import { hospitalsKey } from '@features/Dashboard/api/queries/useGetHospitals';
 
 const addHospital = async (addHospital: AddHospitalArgumentsDTO) => {
-  await productService.addHospital(addHospital);
+  await hospitalService.addHospital(addHospital);
 };
 
 export const useAddHospital = (): UseMutationResult<unknown, unknown, AddHospitalArgumentsDTO> => {

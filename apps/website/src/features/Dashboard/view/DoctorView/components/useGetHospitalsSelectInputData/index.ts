@@ -1,7 +1,7 @@
 import { GetHospitalsResultDTO } from '@dto';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { productService } from '@api/services/ProductService';
+import { hospitalService } from '@api/services/HospitalService';
 
 export const hospitalsNamesKey = {
   all: ['hospitals names'] as const,
@@ -9,7 +9,7 @@ export const hospitalsNamesKey = {
 };
 
 const getHospitalsNames = async () => {
-  const { data } = await productService.getHospitals();
+  const { data } = await hospitalService.getHospitals();
 
   return data;
 };
