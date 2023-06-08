@@ -9,7 +9,7 @@ import {
 
 import { RemoveCell } from './components/RemoveCell';
 
-type Hospital = GetDoctorsResultDTO[0];
+type Hospital = GetDoctorsResultDTO[number];
 
 const columnHelper = createColumnHelper<Hospital>();
 

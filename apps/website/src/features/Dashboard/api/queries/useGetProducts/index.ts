@@ -9,7 +9,10 @@ export const productsKey = {
   details: () => [...productsKey.all, 'details'] as const,
 };
 
-export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | 'type' | 'price'> & {
+export type UseGetProductsResult = (Omit<
+  GetProductsResultDTO[number],
+  'category' | 'type' | 'price'
+> & {
   category: string;
   type: string;
   price: string;

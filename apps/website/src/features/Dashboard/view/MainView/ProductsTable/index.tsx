@@ -9,7 +9,7 @@ import {
 import { UseGetProductsResult } from '@features/Dashboard/api/queries/useGetProducts';
 import { RemoveCell } from '@features/Dashboard/view/MainView/ProductsTable/components/RemoveCell';
 
-type Product = UseGetProductsResult[0];
+type Product = UseGetProductsResult[number];
 
 const columnHelper = createColumnHelper<Product>();
 
