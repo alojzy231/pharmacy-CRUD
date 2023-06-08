@@ -16,7 +16,7 @@ export function HospitalView(): JSX.Element {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync: addHospital } = useAddHospital();
+  const { isLoading, mutateAsync: addHospital } = useAddHospital();
   const { data } = useGetHospitals();
 
   const onSubmit = async (data: AddHospitalArgumentsDTO) => {
@@ -58,7 +58,7 @@ export function HospitalView(): JSX.Element {
             name="address"
             placeholder="Address of the hospital"
           />
-          <Button fullWidth type="submit">
+          <Button fullWidth loading={isLoading} type="submit">
             Submit
           </Button>
         </Stack>

@@ -22,7 +22,7 @@ export function MainView(): JSX.Element {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync: addProduct } = useAddProduct();
+  const { isLoading, mutateAsync: addProduct } = useAddProduct();
   const { data } = useGetProducts();
 
   const onSubmit = async (data: AddProductArgumentsDTO) => {
@@ -86,7 +86,7 @@ export function MainView(): JSX.Element {
             label="Prescription needed"
             name="isPrescriptionNeeded"
           />
-          <Button fullWidth type="submit">
+          <Button fullWidth loading={isLoading} type="submit">
             Submit
           </Button>
         </Stack>
