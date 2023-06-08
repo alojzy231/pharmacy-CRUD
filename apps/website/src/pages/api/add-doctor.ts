@@ -1,4 +1,5 @@
 import { prismaClient } from '@config/prismaClient';
+import { AddDoctorArgumentsDTO } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function addDoctor(
@@ -10,8 +11,17 @@ export default async function addDoctor(
   try {
     const { data } = request.body;
 
-    await prismaClient.hospital.create({
-      data,
+    const { hospitalId, ...restData }: AddDoctorArgumentsDTO = data;
+
+    await prismaClient.doctor.create({
+      data: {
+        ...restData,
+        hospital: {
+          connect: {
+            id: hospitalId,
+          },
+        },
+      },
     });
 
     prismaClient.$disconnect();
