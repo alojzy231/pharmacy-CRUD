@@ -1,4 +1,4 @@
-import { AddHospitalArgumentsDTO, GetHospitalsResultDTO } from '@dto';
+import { AddHospitalArgumentsDTO, DeleteHospitalArgumentsDTO, GetHospitalsResultDTO } from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
@@ -12,6 +12,9 @@ class HospitalService extends PharmacyCRUDClientApiClient {
   }
   getHospitals() {
     return this.api.get<GetHospitalsResultDTO>('/get-hospitals');
+  }
+  deleteHospital(data: DeleteHospitalArgumentsDTO) {
+    return this.api.delete<DeleteHospitalArgumentsDTO>(`/delete-hospital/${data.id}`);
   }
 }
 
