@@ -9,11 +9,11 @@ export default async function getDoctors(
   if (request.method !== 'GET') return response.status(405).end();
 
   try {
-    const data = await prismaClient.doctor.findMany({ include: { hospital: true } });
+    const data = await prismaClient.doctor.findMany();
 
     prismaClient.$disconnect();
 
-    return response.status(200).json({ data });
+    return response.status(200).json(data);
   } catch (error) {
     prismaClient.$disconnect();
 

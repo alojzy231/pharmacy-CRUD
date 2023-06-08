@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-type Hospital = GetHospitalsResultDTO['data'][0];
+type Hospital = GetHospitalsResultDTO[0];
 
 const columnHelper = createColumnHelper<Hospital>();
 
@@ -35,7 +35,7 @@ const columns = [
 ];
 
 type HospitalTableProps = TableProps & {
-  data: GetHospitalsResultDTO['data'];
+  data: GetHospitalsResultDTO;
 };
 
 export function HospitalsTable({ data, ...restProps }: HospitalTableProps): JSX.Element {

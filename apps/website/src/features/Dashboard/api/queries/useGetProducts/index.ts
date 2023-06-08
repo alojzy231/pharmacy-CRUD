@@ -9,27 +9,23 @@ export const productsKey = {
   details: () => [...productsKey.all, 'details'] as const,
 };
 
-const getProducts = async () => {
-  const { data } = await productService.getProducts();
-
-  return data?.data;
-};
-
-export type UseGetProductsResult = (Omit<
-  GetProductsResultDTO['data'][0],
-  'category' | 'type' | 'price'
-> & {
+export type UseGetProductsResult = (Omit<GetProductsResultDTO[0], 'category' | 'type' | 'price'> & {
   category: string;
   type: string;
   price: string;
 })[];
 
+const getProducts = async () => {
+  const { data } = await productService.getProducts();
+
+  return data;
+};
 const formatToDollars = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   style: 'currency',
 }).format;
 
-function select({ data }: GetProductsResultDTO): UseGetProductsResult {
+function select(data: GetProductsResultDTO): UseGetProductsResult {
   if (data === undefined) return data;
 
   return data.map((product) => ({

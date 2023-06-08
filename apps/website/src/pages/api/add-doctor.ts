@@ -16,7 +16,7 @@ export default async function addDoctor(
 
     prismaClient.$disconnect();
 
-    return response.status(200).json({ data });
+    return response.status(200).json(data);
   } catch (error) {
     prismaClient.$disconnect();
 

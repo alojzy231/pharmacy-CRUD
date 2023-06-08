@@ -1,11 +1,11 @@
-import { AddHospitalArgumentsDTO } from '@dto';
+import { AddDoctorArgumentsDTO } from '@dto';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Title } from '@mantine/core';
 import { useForm } from 'react-hook-form';
 
 import { ControlledTextInput } from '@components/ControlledInputs';
-import { useAddHospital } from '@features/Dashboard/api/mutations/useAddHospital';
-import { useGetHospitals } from '@features/Dashboard/api/queries/useGetHospitals';
+import { useAddDoctor } from '@features/Dashboard/api/mutations/useAddDoctor';
+import { useGetDoctors } from '@features/Dashboard/api/queries/useGetDoctors';
 
 import { DoctorsTable } from './DoctorsTable';
 import { defaultValues, FieldValues, schema } from './schema';
@@ -16,12 +16,12 @@ export function DoctorView(): JSX.Element {
     resolver: zodResolver(schema),
   });
 
-  const { mutateAsync: addHospital } = useAddHospital();
-  const { data } = useGetHospitals();
+  const { mutateAsync: addDoctor } = useAddDoctor();
+  const { data } = useGetDoctors();
 
-  const onSubmit = async (data: AddHospitalArgumentsDTO) => {
+  const onSubmit = async (data: AddDoctorArgumentsDTO) => {
     try {
-      await addHospital(data);
+      await addDoctor(data);
 
       reset();
     } catch (error) {
@@ -42,22 +42,11 @@ export function DoctorView(): JSX.Element {
           />
           <ControlledTextInput
             control={control}
-            label="City"
-            name="city"
-            placeholder="Name of the city"
+            label="Last name"
+            name="lastName"
+            placeholder="Last name of the doctor"
           />
-          <ControlledTextInput
-            control={control}
-            label="Street name"
-            name="streetName"
-            placeholder="Name of the street"
-          />
-          <ControlledTextInput
-            control={control}
-            label="Address"
-            name="address"
-            placeholder="Address of the hospital"
-          />
+
           <Button fullWidth type="submit">
             Submit
           </Button>

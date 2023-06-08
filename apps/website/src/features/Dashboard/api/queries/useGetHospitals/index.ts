@@ -11,8 +11,8 @@ export const hospitalsKey = {
 const getHospitals = async () => {
   const { data } = await productService.getHospitals();
 
-  return data?.data;
+  return data;
 };
 
-export const useGetHospitals = (): UseQueryResult<GetHospitalsResultDTO['data']> =>
+export const useGetHospitals = (): UseQueryResult<GetHospitalsResultDTO> =>
   useQuery(hospitalsKey.details(), getHospitals);

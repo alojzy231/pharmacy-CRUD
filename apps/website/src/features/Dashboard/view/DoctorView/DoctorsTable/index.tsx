@@ -1,4 +1,4 @@
-import { GetHospitalsResultDTO } from '@dto';
+import { GetDoctorsResultDTO } from '@dto';
 import { Table, TableProps } from '@mantine/core';
 import {
   createColumnHelper,
@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-type Hospital = GetHospitalsResultDTO['data'][0];
+type Hospital = GetDoctorsResultDTO[0];
 
 const columnHelper = createColumnHelper<Hospital>();
 
@@ -20,25 +20,25 @@ const columns = [
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,
   }),
-  columnHelper.accessor('city', {
+  columnHelper.accessor('lastName', {
     cell: (info) => info.getValue(),
-    header: () => <span>City</span>,
+    header: () => <span>Last name</span>,
   }),
-  columnHelper.accessor('streetName', {
+  columnHelper.accessor('profession', {
     cell: (info) => info.getValue(),
-    header: () => <span>Street name</span>,
+    header: () => <span>Profession</span>,
   }),
-  columnHelper.accessor('address', {
+  columnHelper.accessor('hospital.name', {
     cell: (info) => info.getValue(),
-    header: () => <span>Address</span>,
+    header: () => <span>Hospital name</span>,
   }),
 ];
 
-type HospitalTableProps = TableProps & {
-  data: GetHospitalsResultDTO['data'];
+type DoctorsTableProps = TableProps & {
+  data: GetDoctorsResultDTO;
 };
 
-export function DoctorsTable({ data, ...restProps }: HospitalTableProps): JSX.Element {
+export function DoctorsTable({ data, ...restProps }: DoctorsTableProps): JSX.Element {
   const table = useReactTable({
     columns,
     data,

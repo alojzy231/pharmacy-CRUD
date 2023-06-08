@@ -1,3 +1,3 @@
 import { type Product } from '@prisma/client';
 
-export type GetProductsResultDTO = { data: Product[] };
+export type GetProductsResultDTO = Product[];

@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
 
-export type AddDoctorArgumentsDTO = Prisma.DoctorCreateInput & {
+export type AddDoctorArgumentsDTO = Omit<Prisma.DoctorCreateInput, 'hospital'> & {
   hospitalId: number;
 };

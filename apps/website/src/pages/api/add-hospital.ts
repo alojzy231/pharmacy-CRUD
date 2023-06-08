@@ -1,6 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
 import { prismaClient } from '@config/prismaClient';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function addHospital(
   request: NextApiRequest,
@@ -17,7 +16,7 @@ export default async function addHospital(
 
     prismaClient.$disconnect();
 
-    return response.status(200).json({ data });
+    return response.status(200).json(data);
   } catch (error) {
     prismaClient.$disconnect();
 

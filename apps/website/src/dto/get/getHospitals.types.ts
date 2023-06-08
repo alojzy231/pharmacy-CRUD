@@ -1,3 +1,3 @@
 import { type Hospital } from '@prisma/client';
 
-export type GetHospitalsResultDTO = { data: Hospital[] };
+export type GetHospitalsResultDTO = Hospital[];
