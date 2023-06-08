@@ -1,4 +1,4 @@
 module.exports = {
-  extends: ['@pharmacy-crud/eslint-config/frontend'],
+  extends: ['@pharmacy-crud/eslint-config'],
   root: true,
 };
