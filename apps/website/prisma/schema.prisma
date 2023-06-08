@@ -76,7 +76,6 @@ model Doctor {
   name       String     @unique
   lastName   String
   hospital   Hospital   @relation(fields: [hospitalId], references: [id])
-  address    String
   profession Profession
   hospitalId Int
 }
