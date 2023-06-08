@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-table';
 
 import { UseGetProductsResult } from '@features/Dashboard/api/queries/useGetProducts';
+import { RemoveButton } from '@features/Dashboard/components/RemoveButton';
 
 type Product = UseGetProductsResult[0];
 
@@ -40,6 +41,9 @@ const columns = [
   columnHelper.accessor('category', {
     cell: (info) => info.getValue(),
     header: () => <span>Category</span>,
+  }),
+  columnHelper.accessor('id', {
+    cell: () => <RemoveButton />,
   }),
 ];
 
