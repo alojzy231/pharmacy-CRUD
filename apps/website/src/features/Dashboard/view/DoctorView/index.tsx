@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { ControlledSelect, ControlledTextInput } from '@components/ControlledInputs';
 import { useAddDoctor } from '@features/Dashboard/api/mutations/useAddDoctor';
 import { useGetDoctors } from '@features/Dashboard/api/queries/useGetDoctors';
+import { useGetHospitalsSelectInputData } from '@features/Dashboard/api/queries/useGetHospitalsSelectInputData';
 import { PROFESSIONS } from '@features/Dashboard/view/DoctorView/const';
 
 import { DoctorsTable } from './DoctorsTable';
@@ -19,6 +20,7 @@ export function DoctorView(): JSX.Element {
 
   const { mutateAsync: addDoctor } = useAddDoctor();
   const { data } = useGetDoctors();
+  const { data: hospitalsInputSelectData } = useGetHospitalsSelectInputData();
 
   const onSubmit = async (data: AddDoctorArgumentsDTO) => {
     try {
@@ -53,6 +55,13 @@ export function DoctorView(): JSX.Element {
             label="Profession"
             name="profession"
             placeholder="Profession of the doctor"
+          />
+          <ControlledSelect
+            control={control}
+            data={hospitalsInputSelectData ?? []}
+            label="Hospital"
+            name="hospitalId"
+            placeholder="Hospital"
           />
           <Button fullWidth type="submit">
             Submit
