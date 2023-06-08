@@ -1,5 +1,6 @@
-import { ProductCategory, ProductType } from '@pharmacy-crud/dto';
 import z from 'zod';
+
+import { ProductCategory, ProductType } from '@dto';
 
 export const schema = z.object({
   category: z.nativeEnum(ProductCategory),

@@ -1,11 +1,12 @@
 import { Table, TableProps } from '@mantine/core';
-import { GetHospitalsResultDTO } from '@pharmacy-crud/dto';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+
+import { GetHospitalsResultDTO } from '@dto';
 
 type Hospital = GetHospitalsResultDTO[0];
 

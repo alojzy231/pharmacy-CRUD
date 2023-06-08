@@ -15,6 +15,7 @@
       "@features/*": ["features/*"],
       "@layout/*": ["layout/*"],
       "@utils/*": ["utils/*"],
+      "@dto": ["dto/index.ts"],
     }
   },
   "exclude": [

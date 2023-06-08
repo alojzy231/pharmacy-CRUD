@@ -8,13 +8,15 @@
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "eslint . --cache",
-    "lint:fix": "eslint . --cache --fix"
+    "lint:fix": "eslint . --cache --fix",
+    "db:migrate:dev": "prisma migrate dev",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "3.1.0",
     "@mantine/core": "6.0.13",
     "@mantine/next": "6.0.13",
-    "@pharmacy-crud/dto": "workspace:*",
+    "@dto": "workspace:*",
     "@pharmacy-crud/prisma-client": "workspace:*",
     "@tanstack/react-query": "4.29.12",
     "@tanstack/react-table": "8.9.1",

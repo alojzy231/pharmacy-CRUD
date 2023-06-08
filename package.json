@@ -3,14 +3,11 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "pnpm dlx rimraf@3 -- --./apps/**/.turbo ./node_modules ./pnpm-lock.yaml ./apps/**/.next ./apps/**/dist ./apps/**/node_modules ./packages/**/dist ./packages/**/node_modules",
-    "db:migrate:dev": "turbo run db:migrate:dev --filter backend",
+    "db:migrate:dev": "turbo run db:migrate:dev --filter website",
     "dev": "turbo run dev",
-    "dev:frontend": "turbo run dev --filter frontend",
-    "dev:backend": "turbo run dev --filter backend",
-    "generate": "turbo run generate --filter backend",
+    "generate": "turbo run generate --filter website",
     "lint": "turbo run lint",
-    "lint:frontend": "turbo run lint --filter frontend",
-    "lint:backend": "turbo run lint --filter backend",
+    "lint:website": "turbo run lint --filter website",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
   },

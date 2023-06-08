@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Title } from '@mantine/core';
-import { AddProductArgumentsDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -9,6 +8,7 @@ import {
   ControlledSelect,
   ControlledTextInput,
 } from '@components/ControlledInputs';
+import { AddProductArgumentsDTO } from '@dto';
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
 

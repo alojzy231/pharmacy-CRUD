@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, Stack, Title } from '@mantine/core';
-import { AddHospitalArgumentsDTO } from '@pharmacy-crud/dto';
 import { useForm } from 'react-hook-form';
 
 import { ControlledTextInput } from '@components/ControlledInputs';
+import { AddHospitalArgumentsDTO } from '@dto';
 import { useAddHospital } from '@features/Dashboard/api/mutations/useAddHospital';
 import { useGetHospitals } from '@features/Dashboard/api/queries/useGetHospitals';
 

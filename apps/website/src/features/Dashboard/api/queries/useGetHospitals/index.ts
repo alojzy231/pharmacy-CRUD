@@ -1,7 +1,7 @@
-import { GetHospitalsResultDTO } from '@pharmacy-crud/dto';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { productService } from '@api/services/ProductService';
+import { GetHospitalsResultDTO } from '@dto';
 
 export const hospitalsKey = {
   all: ['hospitals'] as const,

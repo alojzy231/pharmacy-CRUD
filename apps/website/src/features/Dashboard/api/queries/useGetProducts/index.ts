@@ -1,7 +1,7 @@
-import { GetProductsResultDTO } from '@pharmacy-crud/dto';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import { productService } from '@api/services/ProductService';
+import { GetProductsResultDTO } from '@dto';
 import { convertEnumToString } from '@utils/convertEnumToString';
 
 export const productsKey = {

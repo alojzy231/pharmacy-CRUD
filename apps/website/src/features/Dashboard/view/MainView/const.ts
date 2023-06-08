@@ -1,5 +1,4 @@
-import { ProductType, ProductCategory } from '@pharmacy-crud/dto';
-
+import { ProductType, ProductCategory } from '@dto';
 import { convertEnumToString } from '@utils/convertEnumToString';
 
 function convertToSelectData(option: string): { label: string; value: string } {

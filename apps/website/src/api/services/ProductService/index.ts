@@ -1,12 +1,12 @@
+import { AxiosResponse } from 'axios';
+
+import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 import {
   AddHospitalArgumentsDTO,
   AddProductArgumentsDTO,
   GetHospitalsResultDTO,
   GetProductsResultDTO,
-} from '@pharmacy-crud/dto';
-import { AxiosResponse } from 'axios';
-
-import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
+} from '@dto';
 
 class ProductService extends PharmacyCRUDClientApiClient {
   constructor() {
