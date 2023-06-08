@@ -1,3 +1,3 @@
-import { type Product } from '@pharmacy-crud/prisma-client';
+import { type Product } from '@prisma/client';
 
-export type GetProductsResultDTO = Product[];
+export type GetProductsResultDTO = { data: Product[] };

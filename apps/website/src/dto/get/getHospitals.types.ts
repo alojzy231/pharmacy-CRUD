@@ -1,3 +1,3 @@
-import { type Hospital } from '@pharmacy-crud/prisma-client';
+import { type Hospital } from '@prisma/client';
 
 export type GetHospitalsResultDTO = Hospital[];
