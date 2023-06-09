@@ -49,6 +49,7 @@ export function ProductForm({
           label="Name"
           name="name"
           placeholder="Name of the drug"
+          required
         />
         <ControlledSelect
           control={control}
@@ -56,6 +57,7 @@ export function ProductForm({
           label="Type"
           name="type"
           placeholder="Type of the drug"
+          required
         />
         <ControlledSelect
           control={control}
@@ -63,6 +65,7 @@ export function ProductForm({
           label="Category"
           name="category"
           placeholder="Category of the type"
+          required
         />
         <ControlledNumberInput
           control={control}
@@ -70,6 +73,7 @@ export function ProductForm({
           min={1}
           name="quantity"
           placeholder="Quantity of the drug"
+          required
         />
         <ControlledNumberInput
           control={control}
@@ -83,6 +87,7 @@ export function ProductForm({
           parser={(value) => value.replaceAll(/\$\s?|(,*)/g, '')}
           placeholder="Price of the drug"
           precision={2}
+          required
           step={0.01}
         />
         <ControlledCheckbox

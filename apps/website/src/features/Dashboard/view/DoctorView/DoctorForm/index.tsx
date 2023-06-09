@@ -42,12 +42,14 @@ export function DoctorForm({
           label="Name"
           name="name"
           placeholder="Name of the doctor"
+          required
         />
         <ControlledTextInput
           control={control}
           label="Last name"
           name="lastName"
           placeholder="Last name of the doctor"
+          required
         />
         <ControlledSelect
           control={control}
@@ -55,12 +57,14 @@ export function DoctorForm({
           label="Profession"
           name="profession"
           placeholder="Profession of the doctor"
+          required
         />
         <ControlledHospitalSelectInput
           control={control}
           label="Hospital"
           name="hospitalId"
           placeholder="Hospital of the doctor"
+          required
         />
         <Button fullWidth loading={isLoading} type="submit">
           Submit
