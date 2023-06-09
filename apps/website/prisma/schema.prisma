@@ -2,8 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -48,8 +47,6 @@ model Product {
   isPrescriptionNeeded Boolean
   category             ProductCategory
   type                 ProductType
-
-  @@fulltext([name])
 }
 
 model Hospital {
@@ -59,9 +56,6 @@ model Hospital {
   streetName String
   address    String
   Doctor     Doctor[]
-
-  @@fulltext([name])
-  @@fulltext([city])
 }
 
 enum Profession {
@@ -84,7 +78,4 @@ model Doctor {
   hospital   Hospital   @relation(fields: [hospitalId], references: [id])
   profession Profession
   hospitalId Int
-
-  @@fulltext([name])
-  @@fulltext([lastName])
 }
