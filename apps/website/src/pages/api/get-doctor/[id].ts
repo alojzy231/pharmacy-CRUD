@@ -1,14 +1,14 @@
 import { prismaClient } from '@config/prismaClient';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function getProduct(
+export default async function getDoctor(
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void | NextApiResponse> {
   if (request.method !== 'GET') return response.status(405).end();
 
   try {
-    const data = await prismaClient.product.findUnique({
+    const data = await prismaClient.doctor.findUnique({
       where: { id: Number(request.query.id) },
     });
 
@@ -18,8 +18,8 @@ export default async function getProduct(
   } catch (error) {
     prismaClient.$disconnect();
 
-    console.error(`Error getting a product: ${error}`);
+    console.error(`Error getting a doctor: ${error}`);
 
-    return response.status(500).json({ error, message: 'Error getting a product' });
+    return response.status(500).json({ error, message: 'Error getting a doctor' });
   }
 }

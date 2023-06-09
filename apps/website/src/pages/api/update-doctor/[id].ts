@@ -1,18 +1,18 @@
 import { prismaClient } from '@config/prismaClient';
-import { UpdateProductArgumentsDTO } from '@dto';
+import { UpdateDoctorArgumentsDTO } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function updateProduct(
+export default async function updateDoctor(
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void | NextApiResponse> {
   if (request.method !== 'PATCH') return response.status(405).end();
 
   const { data } = request.body;
-  const { id, ...restData }: UpdateProductArgumentsDTO = data;
+  const { id, ...restData }: UpdateDoctorArgumentsDTO = data;
 
   try {
-    await prismaClient.product.update({
+    await prismaClient.doctor.update({
       data: restData,
       where: {
         id: Number(id),
@@ -25,8 +25,8 @@ export default async function updateProduct(
   } catch (error) {
     prismaClient.$disconnect();
 
-    console.error(`Error updating a product: ${error}`);
+    console.error(`Error updating a doctor: ${error}`);
 
-    return response.status(500).json({ error, message: 'Error updating a product' });
+    return response.status(500).json({ error, message: 'Error updating a doctor' });
   }
 }

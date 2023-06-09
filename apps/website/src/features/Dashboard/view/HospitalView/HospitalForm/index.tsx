@@ -39,7 +39,7 @@ export function HospitalForm({
           control={control}
           label="Name"
           name="name"
-          placeholder="Name of the drug"
+          placeholder="Name of the hospital"
         />
         <ControlledTextInput
           control={control}

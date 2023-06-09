@@ -1,15 +1,10 @@
 import { Box, TextInput } from '@mantine/core';
 import { spotlight, SpotlightProvider } from '@mantine/spotlight';
-import { useEffect } from 'react';
 
 import { useGetAll } from './useGetAll';
 
 export default function SearchBar(): JSX.Element {
   const { data } = useGetAll();
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   if (data === undefined) return <Box w={212}>Loading...</Box>;
 
