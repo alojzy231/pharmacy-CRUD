@@ -27,6 +27,7 @@
       "@config/*": ["config/*"],
       "@const/*": ["const/*"],
       "@features/*": ["features/*"],
+      "@hocs/*": ["hocs/*"],
       "@layout/*": ["layout/*"],
       "@utils/*": ["utils/*"],
       "@dto": ["dto/index.ts"],

@@ -1,15 +1,34 @@
+import { UpdateDoctorArgumentsDTO } from '@dto';
 import { Title } from '@mantine/core';
 import { useRouter } from 'next/router';
 
-import { Form } from './Form';
+import { Route } from '@const/route';
+import { useUpdateDoctor } from '@features/Dashboard/api/mutations/useUpdateDoctor';
+import { useGetDoctor } from '@features/Dashboard/api/queries/useGetDoctor';
+import { DoctorForm } from '@features/Dashboard/view/DoctorView/DoctorForm';
 
-export function UpdateDoctorView(): JSX.Element {
-  const { query } = useRouter();
+type UpdateDoctorViewProps = {
+  id: string;
+};
+export function UpdateDoctorView({ id }: UpdateDoctorViewProps): JSX.Element {
+  const router = useRouter();
+  const { isLoading, mutateAsync: updateDoctor } = useUpdateDoctor();
+  const { data } = useGetDoctor({ id });
+
+  const onSubmit = async (data: Omit<UpdateDoctorArgumentsDTO, 'id'>) => {
+    await updateDoctor({ ...data, id });
+
+    router.push(Route.Doctor);
+  };
 
   return (
     <>
       <Title mx="auto">Update doctor</Title>
-      {typeof query.id === 'string' ? <Form id={query.id} /> : 'Loading...'}
+      {data ? (
+        <DoctorForm defaultValues={data} isLoading={isLoading} onSubmitCallback={onSubmit} />
+      ) : (
+        'Loading...'
+      )}
     </>
   );
 }

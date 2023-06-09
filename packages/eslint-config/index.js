@@ -91,9 +91,10 @@ module.exports = {
         "newlines-between": "always",
         pathGroups: [
           { group: "internal", pattern: "@api/**" },
-          { group: "internal", pattern: "@features/**" },
           { group: "internal", pattern: "@components/**" },
           { group: "internal", pattern: "@const/**" },
+          { group: "internal", pattern: "@features/**" },
+          { group: "internal", pattern: "@hocs/**" },
           { group: "internal", pattern: "@dto/**" },
           { group: "internal", pattern: "@layout/**" },
         ],
