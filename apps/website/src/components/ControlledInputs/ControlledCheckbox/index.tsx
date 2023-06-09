@@ -17,7 +17,12 @@ export function ControlledCheckbox<TFieldValues extends FieldValues>({
       control={control}
       name={name}
       render={({ field: hookFormInputProps, fieldState: { error } }): JSX.Element => (
-        <Checkbox error={error?.message} {...inputProps} {...hookFormInputProps} />
+        <Checkbox
+          checked={hookFormInputProps.value}
+          error={error?.message}
+          {...inputProps}
+          {...hookFormInputProps}
+        />
       )}
     />
   );
