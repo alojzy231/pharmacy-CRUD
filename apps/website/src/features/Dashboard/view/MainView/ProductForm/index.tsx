@@ -8,6 +8,7 @@ import {
   ControlledSelect,
   ControlledTextInput,
 } from '@components/ControlledInputs';
+import { ControlledDoctorSelectInput } from '@features/Dashboard/view/MainView/ProductForm/components/ControlledDoctorSelectInput';
 
 import { CATEGORIES, TYPES } from './const';
 import { FieldValues, schema, defaultValues as emptyDefaultValues } from './schema';
@@ -23,10 +24,12 @@ export function ProductForm({
   isLoading,
   onSubmitCallback,
 }: ProductFormProps): JSX.Element {
-  const { control, handleSubmit, reset } = useForm<FieldValues>({
+  const { control, handleSubmit, reset, watch } = useForm<FieldValues>({
     defaultValues: defaultValues || emptyDefaultValues,
     resolver: zodResolver(schema),
   });
+
+  const watchIsPrescriptionRequired = watch('isPrescriptionNeeded');
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -86,6 +89,13 @@ export function ProductForm({
           control={control}
           label="Prescription needed"
           name="isPrescriptionNeeded"
+        />
+        <ControlledDoctorSelectInput
+          control={control}
+          disabled={!watchIsPrescriptionRequired}
+          label="Doctor"
+          name="doctorId"
+          placeholder="Doctor who prescribed the drug"
         />
         <Button fullWidth loading={isLoading} type="submit">
           Submit
