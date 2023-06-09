@@ -14,7 +14,7 @@ type UseGetAllResult = SpotlightAction[];
 const select = (data: SearchResultDTO): UseGetAllResult => {
   const array = Object.entries(data).flatMap(([key, value]) => {
     if (key === SEARCH_RESULT_KEYS.product) {
-      const products = value as SearchResultDTO['product'];
+      const products = Array.isArray(value) ? (value as SearchResultDTO['product']) : [value];
 
       return products.map(({ category, name, type }) => ({
         description: `${category}, ${type}`,
@@ -24,7 +24,7 @@ const select = (data: SearchResultDTO): UseGetAllResult => {
     }
 
     if (key === SEARCH_RESULT_KEYS.doctor) {
-      const doctors = value as SearchResultDTO['doctor'];
+      const doctors = Array.isArray(value) ? (value as SearchResultDTO['doctor']) : [value];
 
       return doctors.map(({ hospital, lastName, name, profession }) => ({
         description: `${profession.toLowerCase()}, ${hospital}`,
@@ -33,7 +33,9 @@ const select = (data: SearchResultDTO): UseGetAllResult => {
       }));
     }
 
-    const hospitals = value as SearchResultDTO['hospital'];
+    const hospitals = Array.isArray(value) ? (value as SearchResultDTO['hospital']) : [value];
+
+    console.log(hospitals);
 
     return hospitals.map(({ address, city, name, streetName }) => ({
       description: `${city}, ${streetName}, ${address} `,

@@ -14,10 +14,6 @@ type Product = UseGetProductsResult[number];
 const columnHelper = createColumnHelper<Product>();
 
 const columns = [
-  columnHelper.accessor('id', {
-    cell: (info) => info.getValue(),
-    header: () => <span>Id</span>,
-  }),
   columnHelper.accessor('name', {
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,

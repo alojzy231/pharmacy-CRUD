@@ -14,10 +14,6 @@ type Hospital = GetDoctorsResultDTO[number];
 const columnHelper = createColumnHelper<Hospital>();
 
 const columns = [
-  columnHelper.accessor('id', {
-    cell: (info) => info.getValue(),
-    header: () => <span>Id</span>,
-  }),
   columnHelper.accessor('name', {
     cell: (info) => info.getValue(),
     header: () => <span>Name</span>,
