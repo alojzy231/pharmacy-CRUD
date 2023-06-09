@@ -16,8 +16,16 @@ export function ControlledSelect<TFieldValues extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field: hookFormInputProps, fieldState: { error } }): JSX.Element => (
-        <Select error={error?.message} {...inputProps} {...hookFormInputProps} />
+      render={({
+        field: { value, ...restHookFormInputProps },
+        fieldState: { error },
+      }): JSX.Element => (
+        <Select
+          error={error?.message}
+          value={String(value)}
+          {...inputProps}
+          {...restHookFormInputProps}
+        />
       )}
     />
   );
