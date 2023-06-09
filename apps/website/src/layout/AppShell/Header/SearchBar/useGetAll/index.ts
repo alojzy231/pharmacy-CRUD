@@ -40,8 +40,7 @@ const select = (data: SearchResultDTO, redirect: NextRouter['push']): UseGetAllR
     return hospitals.map(({ address, city, id, name, streetName }) => ({
       description: `${city}, ${streetName}, ${address} `,
       onTrigger: () => redirect(`${Route.Hospital}/${id}`),
-
-      title: `Hospital: ${name}}`,
+      title: `Hospital: ${name}`,
     }));
   });
 
