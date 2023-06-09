@@ -17,7 +17,7 @@ export default function SearchBar(): JSX.Element {
     >
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/*@ts-ignore*/}
-      <TextInput mr={12} my="auto" onClick={spotlight.open} placeholder="Search" w={200} />;
+      <TextInput mr={12} my="auto" onClick={spotlight.open} placeholder="Search" w={200} />
     </SpotlightProvider>
   );
 }
