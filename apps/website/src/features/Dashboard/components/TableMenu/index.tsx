@@ -1,4 +1,4 @@
-import { ActionIcon, createStyles, Menu } from '@mantine/core';
+import { ActionIcon, createStyles, Loader, Menu } from '@mantine/core';
 import { IconDots, IconEdit, IconTrash } from '@tabler/icons-react';
 import NextLink from 'next/link';
 
@@ -12,10 +12,13 @@ const useStyles = createStyles({
 type TableMenuProps = {
   onRemove: () => void;
   href: string;
+  isLoading?: boolean;
 };
 
-export function TableMenu({ href, onRemove }: TableMenuProps): JSX.Element {
+export function TableMenu({ href, isLoading, onRemove }: TableMenuProps): JSX.Element {
   const { classes } = useStyles();
+
+  if (isLoading) return <Loader size={16} />;
 
   return (
     <Menu shadow="md" width={200}>

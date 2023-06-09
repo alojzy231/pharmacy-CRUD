@@ -6,7 +6,13 @@ type MenuProps = {
   id: number;
 };
 export function Menu({ id }: MenuProps): JSX.Element {
-  const { mutate } = useDeleteDoctor();
+  const { isLoading, mutate } = useDeleteDoctor();
 
-  return <TableMenu href={`${Route.Doctor}/${id}`} onRemove={() => mutate({ id })} />;
+  return (
+    <TableMenu
+      href={`${Route.Doctor}/${id}`}
+      isLoading={isLoading}
+      onRemove={() => mutate({ id })}
+    />
+  );
 }
