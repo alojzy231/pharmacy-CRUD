@@ -1,4 +1,3 @@
-import { GetDoctorsResultDTO } from '@dto';
 import { Table, TableProps } from '@mantine/core';
 import {
   createColumnHelper,
@@ -7,9 +6,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
+import { UseGetDoctorsResult } from '@features/Dashboard/api/queries/useGetDoctors';
+
 import { RemoveCell } from './components/RemoveCell';
 
-type Hospital = GetDoctorsResultDTO[number];
+type Hospital = UseGetDoctorsResult[number];
 
 const columnHelper = createColumnHelper<Hospital>();
 
@@ -37,7 +38,7 @@ const columns = [
 ];
 
 type DoctorsTableProps = TableProps & {
-  data: GetDoctorsResultDTO;
+  data: UseGetDoctorsResult;
 };
 
 export function DoctorsTable({ data, ...restProps }: DoctorsTableProps): JSX.Element {
