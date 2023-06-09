@@ -1,8 +1,10 @@
 import { SEARCH_RESULT_KEYS, SearchResultDTO } from '@dto';
 import { SpotlightAction } from '@mantine/spotlight';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { NextRouter, useRouter } from 'next/router';
 
 import { searchService } from '@api/services/SearchService';
+import { Route } from '@const/route';
 
 export const searchKey = {
   all: ['hospitals'] as const,
@@ -11,14 +13,14 @@ export const searchKey = {
 
 type UseGetAllResult = SpotlightAction[];
 
-const select = (data: SearchResultDTO): UseGetAllResult => {
+const select = (data: SearchResultDTO, redirect: NextRouter['push']): UseGetAllResult => {
   const array = Object.entries(data).flatMap(([key, value]) => {
     if (key === SEARCH_RESULT_KEYS.product) {
       const products = Array.isArray(value) ? (value as SearchResultDTO['product']) : [value];
 
-      return products.map(({ category, name, type }) => ({
+      return products.map(({ category, id, name, type }) => ({
         description: `${category}, ${type}`,
-        onTrigger: () => console.log('Home'),
+        onTrigger: () => redirect(`${Route.Product}/${id}`),
         title: `Product: ${name}`,
       }));
     }
@@ -26,21 +28,20 @@ const select = (data: SearchResultDTO): UseGetAllResult => {
     if (key === SEARCH_RESULT_KEYS.doctor) {
       const doctors = Array.isArray(value) ? (value as SearchResultDTO['doctor']) : [value];
 
-      return doctors.map(({ hospital, lastName, name, profession }) => ({
+      return doctors.map(({ hospital, id, lastName, name, profession }) => ({
         description: `${profession.toLowerCase()}, ${hospital}`,
-        onTrigger: () => console.log('Home'),
+        onTrigger: () => redirect(`${Route.Doctor}/${id}`),
         title: `Doctor: ${name} ${lastName}`,
       }));
     }
 
     const hospitals = Array.isArray(value) ? (value as SearchResultDTO['hospital']) : [value];
 
-    console.log(hospitals);
-
-    return hospitals.map(({ address, city, name, streetName }) => ({
+    return hospitals.map(({ address, city, id, name, streetName }) => ({
       description: `${city}, ${streetName}, ${address} `,
-      onTrigger: () => console.log('Home'),
-      title: `Doctor: ${name}}`,
+      onTrigger: () => redirect(`${Route.Hospital}/${id}`),
+
+      title: `Hospital: ${name}}`,
     }));
   });
 
@@ -53,5 +54,8 @@ const getAll = async () => {
   return data;
 };
 
-export const useGetAll = (): UseQueryResult<UseGetAllResult> =>
-  useQuery(searchKey.details(), getAll, { select });
+export const useGetAll = (): UseQueryResult<UseGetAllResult> => {
+  const router = useRouter();
+
+  return useQuery(searchKey.details(), getAll, { select: (data) => select(data, router.push) });
+};
