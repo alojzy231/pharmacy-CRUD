@@ -1,4 +1,4 @@
-import { UpdateProductArgumentsDTO } from '@dto';
+import { UpdateDoctorArgumentsDTO } from '@dto';
 import { router } from 'next/client';
 
 import { Route } from '@const/route';
@@ -10,13 +10,13 @@ type FormProps = {
   id: string;
 };
 export function Form({ id }: FormProps): JSX.Element {
-  const { isLoading, mutateAsync: updateProduct } = useUpdateDoctor();
+  const { isLoading, mutateAsync: updateDoctor } = useUpdateDoctor();
   const { data } = useGetDoctor({ id });
 
-  const onSubmit = async (data: Omit<UpdateProductArgumentsDTO, 'id'>) => {
-    await updateProduct({ ...data, id });
+  const onSubmit = async (data: Omit<UpdateDoctorArgumentsDTO, 'id'>) => {
+    await updateDoctor({ ...data, id });
 
-    router.push(Route.Dashboard);
+    router.push(Route.Doctor);
   };
 
   return (
