@@ -4,6 +4,7 @@
     "build": "turbo run build",
     "clean": "pnpm dlx rimraf@3 -- --./apps/**/.turbo ./node_modules ./pnpm-lock.yaml ./apps/**/.next ./apps/**/dist ./apps/**/node_modules ./packages/**/dist ./packages/**/node_modules",
     "db:migrate:dev": "turbo run db:migrate:dev --filter website",
+    "db:migrate:reset": "turbo run db:migrate:reset --filter website",
     "dev": "turbo run dev",
     "generate": "turbo run generate --filter website",
     "lint": "turbo run lint",

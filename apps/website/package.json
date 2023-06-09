@@ -10,6 +10,7 @@
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --cache --fix",
     "db:migrate:dev": "prisma migrate dev",
+    "db:migrate:reset": "prisma migrate reset",
     "generate": "prisma generate"
   },
   "dependencies": {
