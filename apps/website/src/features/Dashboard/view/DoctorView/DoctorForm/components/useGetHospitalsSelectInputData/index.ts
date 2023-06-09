@@ -14,12 +14,19 @@ const getHospitalsNames = async () => {
   return data;
 };
 
-export type UseGetHospitalsSelectInputDataResult = ({
+export type UseGetHospitalsSelectInputDataResult = {
   value: string;
   label: string;
-} & Omit<GetHospitalsResultDTO[number], 'id' | 'name'>)[];
+  description: string;
+}[];
 const select = (data: GetHospitalsResultDTO): UseGetHospitalsSelectInputDataResult =>
-  data.map(({ id, name, ...restData }) => ({ label: name, value: String(id), ...restData }));
+  data
+    ? data.map(({ address, city, id, name, streetName }) => ({
+        description: `${city} ${streetName} ${address}`,
+        label: name,
+        value: String(id),
+      }))
+    : [];
 
 export const useGetHospitalsSelectInputData =
   (): UseQueryResult<UseGetHospitalsSelectInputDataResult> =>

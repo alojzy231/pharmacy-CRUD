@@ -21,11 +21,13 @@ export type UseGetDoctorsSelectInputDataResult = {
   description: string;
 }[];
 const select = (data: GetDoctorsResultDTO): UseGetDoctorsSelectInputDataResult =>
-  data.map(({ hospital: { city, name: hospitalName }, id, lastName, name, profession }) => ({
-    description: `${convertEnumToString(profession)} | ${hospitalName} ${city}`,
-    label: `${name} ${lastName}`,
-    value: String(id),
-  }));
+  data
+    ? data.map(({ hospital: { city, name: hospitalName }, id, lastName, name, profession }) => ({
+        description: `${convertEnumToString(profession)} | ${hospitalName} ${city}`,
+        label: `${name} ${lastName}`,
+        value: String(id),
+      }))
+    : [];
 
 export const useGetDoctorsSelectInputData =
   (): UseQueryResult<UseGetDoctorsSelectInputDataResult> =>
