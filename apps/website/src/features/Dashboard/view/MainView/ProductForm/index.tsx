@@ -1,4 +1,3 @@
-import { AddProductArgumentsDTO } from '@dto';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Stack } from '@mantine/core';
 import { useForm } from 'react-hook-form';
@@ -14,7 +13,7 @@ import { CATEGORIES, TYPES } from './const';
 import { FieldValues, schema, defaultValues as emptyDefaultValues } from './schema';
 
 type ProductFormProps = {
-  onSubmitCallback: (data: AddProductArgumentsDTO) => Promise<unknown>;
+  onSubmitCallback: (data: FieldValues) => Promise<unknown>;
   defaultValues?: FieldValues;
   isLoading: boolean;
 };
@@ -29,7 +28,7 @@ export function ProductForm({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: AddProductArgumentsDTO) => {
+  const onSubmit = async (data: FieldValues) => {
     try {
       await onSubmitCallback(data);
 
