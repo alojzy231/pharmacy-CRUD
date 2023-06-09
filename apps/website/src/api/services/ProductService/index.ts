@@ -4,6 +4,7 @@ import {
   GetProductsResultDTO,
   GetProductResultDTO,
   GetProductArgumentsDTO,
+  UpdateProductArgumentsDTO,
 } from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
@@ -24,6 +25,9 @@ class ProductService extends PharmacyCRUDClientApiClient {
   }
   deleteProduct(data: DeleteProductArgumentsDTO) {
     return this.api.delete<DeleteProductArgumentsDTO>(`/delete-product/${data.id}`);
+  }
+  updateProduct(data: UpdateProductArgumentsDTO) {
+    return this.api.patch<UpdateProductArgumentsDTO>(`/update-product/${data.id}`, { data });
   }
 }
 
