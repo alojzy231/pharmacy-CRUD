@@ -8,7 +8,7 @@ import {
 
 import { UseGetDoctorsResult } from '@features/Dashboard/api/queries/useGetDoctors';
 
-import { RemoveCell } from './components/RemoveCell';
+import { Menu } from './components/Menu';
 
 type Hospital = UseGetDoctorsResult[number];
 
@@ -32,7 +32,7 @@ const columns = [
     header: () => <span>Hospital name</span>,
   }),
   columnHelper.accessor('id', {
-    cell: (info) => <RemoveCell id={info.getValue()} />,
+    cell: (info) => <Menu id={info.getValue()} />,
     header: () => <span />,
   }),
 ];

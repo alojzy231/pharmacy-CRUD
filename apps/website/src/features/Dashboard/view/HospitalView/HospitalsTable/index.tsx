@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { RemoveCell } from './components/RemoveCell';
+import { Menu } from '@features/Dashboard/view/HospitalView/HospitalsTable/components/Menu';
 
 type Hospital = GetHospitalsResultDTO[number];
 
@@ -31,7 +31,7 @@ const columns = [
     header: () => <span>Address</span>,
   }),
   columnHelper.accessor('id', {
-    cell: (info) => <RemoveCell id={info.getValue()} />,
+    cell: (info) => <Menu id={info.getValue()} />,
     header: () => <span />,
   }),
 ];

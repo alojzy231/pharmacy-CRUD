@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-table';
 
 import { UseGetProductsResult } from '@features/Dashboard/api/queries/useGetProducts';
-import { RemoveCell } from '@features/Dashboard/view/MainView/ProductsTable/components/RemoveCell';
+import { Menu } from '@features/Dashboard/view/MainView/ProductsTable/components/Menu';
 
 type Product = UseGetProductsResult[number];
 
@@ -39,7 +39,7 @@ const columns = [
     header: () => <span>Category</span>,
   }),
   columnHelper.accessor('id', {
-    cell: (info) => <RemoveCell id={info.getValue()} />,
+    cell: (info) => <Menu id={info.getValue()} />,
     header: () => <span />,
   }),
 ];
