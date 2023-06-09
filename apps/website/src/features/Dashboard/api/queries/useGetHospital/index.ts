@@ -10,7 +10,9 @@ export const hospitalKey = {
 
 export type UseGetHospitalResult = GetHospitalResultDTO;
 
-const getHospital = async (queryData: GetHospitalArgumentsDTO) => {
+export const getHospital = async (
+  queryData: GetHospitalArgumentsDTO
+): Promise<GetHospitalResultDTO> => {
   const { data } = await hospitalService.getHospital(queryData);
 
   return data;

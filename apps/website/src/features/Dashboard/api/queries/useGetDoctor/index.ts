@@ -10,7 +10,7 @@ export const doctorKey = {
 
 export type UseGetDoctorResult = GetDoctorResultDTO;
 
-const getDoctor = async (queryData: GetDoctorArgumentsDTO) => {
+export const getDoctor = async (queryData: GetDoctorArgumentsDTO): Promise<GetDoctorResultDTO> => {
   const { data } = await doctorService.getDoctor(queryData);
 
   return data;

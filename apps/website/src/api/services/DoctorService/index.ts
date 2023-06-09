@@ -3,8 +3,8 @@ import {
   AddDoctorArgumentsDTO,
   DeleteDoctorArgumentsDTO,
   UpdateDoctorArgumentsDTO,
-  GetProductResultDTO,
   GetDoctorArgumentsDTO,
+  GetDoctorResultDTO,
 } from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
@@ -18,7 +18,7 @@ class DoctorService extends PharmacyCRUDClientApiClient {
     return this.api.post<AddDoctorArgumentsDTO>('/add-doctor', { data });
   }
   getDoctor(data: GetDoctorArgumentsDTO) {
-    return this.api.get<GetProductResultDTO>(`/get-doctor/${data.id}`);
+    return this.api.get<GetDoctorResultDTO>(`/get-doctor/${data.id}`);
   }
   getDoctors() {
     return this.api.get<GetDoctorsResultDTO>('/get-doctors');

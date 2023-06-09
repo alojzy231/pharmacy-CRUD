@@ -1,19 +1,18 @@
-import { UpdateHospitalArgumentsDTO } from '@dto';
+import { GetHospitalResultDTO, UpdateHospitalArgumentsDTO } from '@dto';
 import { Title } from '@mantine/core';
 import { useRouter } from 'next/router';
 
 import { Route } from '@const/route';
 import { useUpdateHospital } from '@features/Dashboard/api/mutations/useUpdateHospital';
-import { useGetHospital } from '@features/Dashboard/api/queries/useGetHospital';
 import { HospitalForm } from '@features/Dashboard/view/HospitalView/HospitalForm';
+import { WithGetUpdateDataResultData } from '@hocs/withGetUpdateData';
 
-type UpdateHospitalViewProps = {
-  id: string;
-};
-export function UpdateHospitalView({ id }: UpdateHospitalViewProps): JSX.Element {
+export function UpdateHospitalView({
+  data,
+  id,
+}: WithGetUpdateDataResultData<GetHospitalResultDTO>): JSX.Element {
   const router = useRouter();
   const { isLoading, mutateAsync: updateHospital } = useUpdateHospital();
-  const { data } = useGetHospital({ id });
 
   const onSubmit = async (data: Omit<UpdateHospitalArgumentsDTO, 'id'>) => {
     await updateHospital({ ...data, id });

@@ -10,7 +10,9 @@ export const productKey = {
 
 export type UseGetProductResult = GetProductResultDTO;
 
-const getProduct = async (queryData: GetProductArgumentsDTO) => {
+export const getProduct = async (
+  queryData: GetProductArgumentsDTO
+): Promise<GetProductResultDTO> => {
   const { data } = await productService.getProduct(queryData);
 
   return data;
