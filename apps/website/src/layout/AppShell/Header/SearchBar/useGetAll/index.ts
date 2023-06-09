@@ -1,6 +1,7 @@
 import { SEARCH_RESULT_KEYS, SearchResultDTO } from '@dto';
 import { SpotlightAction } from '@mantine/spotlight';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { convertEnumToString } from '@utils/convertEnumToString';
 import { NextRouter, useRouter } from 'next/router';
 
 import { searchService } from '@api/services/SearchService';
@@ -19,7 +20,7 @@ const select = (data: SearchResultDTO, redirect: NextRouter['push']): UseGetAllR
       const products = Array.isArray(value) ? (value as SearchResultDTO['product']) : [value];
 
       return products.map(({ category, id, name, type }) => ({
-        description: `${category}, ${type}`,
+        description: `${convertEnumToString(category)}, ${convertEnumToString(type)}`,
         onTrigger: () => redirect(`${Route.Product}/${id}`),
         title: `Product: ${name}`,
       }));
@@ -29,7 +30,7 @@ const select = (data: SearchResultDTO, redirect: NextRouter['push']): UseGetAllR
       const doctors = Array.isArray(value) ? (value as SearchResultDTO['doctor']) : [value];
 
       return doctors.map(({ hospital, id, lastName, name, profession }) => ({
-        description: `${profession.toLowerCase()}, ${hospital}`,
+        description: `${convertEnumToString(profession)}, ${hospital.name}`,
         onTrigger: () => redirect(`${Route.Doctor}/${id}`),
         title: `Doctor: ${name} ${lastName}`,
       }));
