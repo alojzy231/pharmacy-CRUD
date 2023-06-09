@@ -45,6 +45,8 @@ model Product {
   isPrescriptionNeeded Boolean
   category             ProductCategory
   type                 ProductType
+  Doctor               Doctor          @relation(fields: [doctorId], references: [id])
+  doctorId             Int
 }
 
 model Hospital {
@@ -76,4 +78,5 @@ model Doctor {
   hospital   Hospital   @relation(fields: [hospitalId], references: [id])
   profession Profession
   hospitalId Int
+  Product    Product[]
 }
