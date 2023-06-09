@@ -40,8 +40,6 @@ enum ProductCategory {
 model Product {
   id                   Int             @id @default(autoincrement())
   name                 String          @unique
-  substitutes          Product[]       @relation("ProductSubstitutes")
-  substitutedBy        Product[]       @relation("ProductSubstitutes")
   quantity             Int
   price                Float
   isPrescriptionNeeded Boolean
