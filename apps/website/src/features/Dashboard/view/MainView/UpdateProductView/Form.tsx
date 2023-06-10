@@ -16,7 +16,7 @@ export function Form({ id }: FormProps): JSX.Element {
   const onSubmit = async (data: Omit<UpdateProductArgumentsDTO, 'id'>) => {
     await updateProduct({ ...data, id });
 
-    router.push(Route.Dashboard);
+    router.push(Route.Product);
   };
 
   return (

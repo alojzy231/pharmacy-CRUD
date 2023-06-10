@@ -17,7 +17,7 @@ const SearchBar = dynamic(() => import('./SearchBar'), {
 });
 
 const ROUTES = [
-  { href: Route.Dashboard, label: 'Product' },
+  { href: Route.Product, label: 'Product' },
   { href: Route.Hospital, label: 'Hospital' },
   { href: Route.Doctor, label: 'Doctor' },
 ];

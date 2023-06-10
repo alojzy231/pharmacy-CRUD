@@ -20,7 +20,7 @@ export function withGetUpdateData<TData>(
     if (typeof id !== 'string') {
       return {
         redirect: {
-          destination: Route.Dashboard,
+          destination: Route.Product,
           permanent: true,
         },
       };
