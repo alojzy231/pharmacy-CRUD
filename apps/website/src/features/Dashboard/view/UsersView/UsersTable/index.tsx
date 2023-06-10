@@ -7,6 +7,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { convertEnumToString } from '@utils/convertEnumToString';
 import { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -40,7 +41,7 @@ const columns = [
     header: () => <span>Email</span>,
   }),
   columnHelper.accessor('role', {
-    cell: (info) => info.getValue(),
+    cell: (info) => convertEnumToString(info.getValue()),
     header: () => <span>Role</span>,
   }),
 ];
@@ -73,7 +74,6 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
 
   useEffect(() => {
     if (!!updatingUserId) {
-      console.log('assaa', data[Number(updatingUserId)]);
       reset({ ...data[Number(updatingUserId)], password: '' });
     }
   }, [updatingUserId]);
