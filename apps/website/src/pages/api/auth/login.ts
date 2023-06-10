@@ -1,3 +1,4 @@
+import { apiConfig } from '@config/apiConfig';
 import { prismaClient } from '@config/prismaClient';
 import { LoginArgumentsDTO } from '@dto';
 import bcrypt from 'bcrypt';
@@ -7,11 +8,9 @@ import { setCookie } from 'nookies';
 
 import { ACCESS_TOKEN } from '@const/cookies';
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET as string;
-
 function signAccessToken(payload: LoginArgumentsDTO): Promise<string> {
   return new Promise((resolve, reject) => {
-    jwt.sign({ payload }, ACCESS_TOKEN_SECRET, {}, (error, token) => {
+    jwt.sign({ payload }, apiConfig.ACCESS_TOKEN_SECRET, {}, (error, token) => {
       if (error) {
         reject(error);
       }
