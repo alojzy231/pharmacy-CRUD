@@ -12,7 +12,7 @@ export function middleware(request: NextRequest): NextResponse {
   }
 
   // Unauthorised user (no session token) - redirect to Login page
-  if (!accessToken) {
+  if (!accessToken && request.nextUrl.pathname !== Route.Login) {
     return NextResponse.redirect(new URL(Route.Login, request.url));
   }
 
