@@ -1,6 +1,16 @@
 import { Role } from '@dto';
-import { Avatar, Group, Loader, Menu, Stack, Text, UnstyledButton } from '@mantine/core';
+import {
+  Avatar,
+  createStyles,
+  Group,
+  Loader,
+  Menu,
+  Stack,
+  Text,
+  UnstyledButton,
+} from '@mantine/core';
 import { IconLogout, IconUsers } from '@tabler/icons-react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 
@@ -9,7 +19,15 @@ import { Route } from '@const/route';
 
 import { useGetMe } from './api/useGetMe';
 
+const useStyles = createStyles({
+  link: {
+    color: 'inherit',
+    textDecoration: 'none',
+  },
+});
+
 export function ProfileInfo(): JSX.Element {
+  const { classes } = useStyles();
   const { data, isLoading } = useGetMe();
   const router = useRouter();
 
@@ -17,10 +35,6 @@ export function ProfileInfo(): JSX.Element {
     destroyCookie(null, ACCESS_TOKEN);
 
     router.push(Route.Login);
-  };
-
-  const onUserRedirect = () => {
-    router.push(Route.Users);
   };
 
   return (
@@ -42,8 +56,10 @@ export function ProfileInfo(): JSX.Element {
           </Menu.Target>
           <Menu.Dropdown>
             {data.role === Role.ADMIN && (
-              <Menu.Item icon={<IconUsers size={14} />} onClick={onUserRedirect}>
-                Users
+              <Menu.Item icon={<IconUsers size={14} />}>
+                <NextLink className={classes.link} href={Route.Users}>
+                  Users
+                </NextLink>
               </Menu.Item>
             )}
             <Menu.Item color="red" icon={<IconLogout size={14} />} onClick={onLogout}>
