@@ -1,6 +1,6 @@
 import { GetUsersResultDTO } from '@dto';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Table, TableProps } from '@mantine/core';
+import { Group, Table, TableProps } from '@mantine/core';
 import {
   createColumnHelper,
   flexRender,
@@ -11,7 +11,9 @@ import { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAddUser } from '@features/Dashboard/api/mutations/useAddUser';
+import { useDeleteUser } from '@features/Dashboard/api/mutations/useDeleteUser';
 import { useUpdateUser } from '@features/Dashboard/api/mutations/useUpdateUser';
+import { FormButton } from '@features/Dashboard/view/UsersView/UsersTable/components/FormButton';
 
 import { Menu } from './components/Menu';
 import { EditRow } from './EditRow';
@@ -51,11 +53,12 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
   const [isAddingUser, setIsAddingUser] = useState(false);
   const [updatingUserId, setUpdatingUserId] = useState<null | string>(null);
 
-  const shouldShowAddButton = !isAddingUser && updatingUserId === null;
-
   const { isLoading: isLoadingAddUser, mutateAsync: addUser } = useAddUser();
   const { isLoading: isLoadingUpdateUser, mutateAsync: updateUser } = useUpdateUser();
-  const isLoading = isLoadingAddUser || isLoadingUpdateUser;
+  const { isLoading: isLoadingDeletingUser, mutate: deleteUser } = useDeleteUser();
+  const isLoading = isLoadingAddUser || isLoadingUpdateUser || isLoadingDeletingUser;
+
+  const isFormActive = isAddingUser || updatingUserId !== null;
 
   const { control, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues,
@@ -92,51 +95,67 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Table {...restProps}>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-                <th>Password</th>
-                <th />
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <Fragment key={row.id}>
-                {updatingUserId === row.id ? (
-                  <EditRow control={control} isLoading={isLoading} names={FORM_NAMES} />
-                ) : (
-                  <tr>
-                    {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    ))}
-                    <td>********</td>
-                    <td>
-                      <Menu onEdit={() => setUpdatingUserId(row.id)} onRemove={() => null} />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Table {...restProps}>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id}>
+                  {flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+              <th>Password</th>
+              <th />
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <Fragment key={row.id}>
+              {updatingUserId === row.id ? (
+                <EditRow
+                  control={control}
+                  isLoading={isLoading}
+                  names={FORM_NAMES}
+                  onCancel={() => setUpdatingUserId(null)}
+                />
+              ) : (
+                <tr>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
-                  </tr>
-                )}
-              </Fragment>
-            ))}
-            {isAddingUser && <EditRow control={control} isLoading={isLoading} names={FORM_NAMES} />}
-          </tbody>
-        </Table>
-      </form>
-      {shouldShowAddButton && (
-        <Button mt={24} onClick={() => setIsAddingUser(true)} variant="outline">
-          Add User
-        </Button>
-      )}
-    </>
+                  ))}
+                  <td>********</td>
+                  <td>
+                    <Menu
+                      isLoading={isLoadingDeletingUser}
+                      onEdit={() => setUpdatingUserId(row.id)}
+                      onRemove={() => deleteUser({ id: Number(row.id) })}
+                    />
+                  </td>
+                </tr>
+              )}
+            </Fragment>
+          ))}
+          {isAddingUser && (
+            <EditRow
+              control={control}
+              isLoading={isLoading}
+              names={FORM_NAMES}
+              onCancel={() => setIsAddingUser(false)}
+            />
+          )}
+        </tbody>
+      </Table>
+      <Group mt={24} position="right">
+        <FormButton
+          isFormActive={isFormActive}
+          isLoading={isLoading}
+          onAddUser={() => setIsAddingUser(true)}
+        />
+      </Group>
+    </form>
   );
 }

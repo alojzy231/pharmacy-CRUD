@@ -1,4 +1,9 @@
-import { AddUserArgumentsDTO, GetUsersResultDTO, UpdateUserArgumentsDTO } from '@dto';
+import {
+  AddUserArgumentsDTO,
+  DeleteUserArgumentsDTO,
+  GetUsersResultDTO,
+  UpdateUserArgumentsDTO,
+} from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
@@ -12,6 +17,9 @@ class UserService extends PharmacyCRUDClientApiClient {
   }
   getUsers() {
     return this.api.get<GetUsersResultDTO>(`/get-users`);
+  }
+  deleteUser(data: DeleteUserArgumentsDTO) {
+    return this.api.delete(`/delete-user/${data.id}`);
   }
   updateUser(data: UpdateUserArgumentsDTO) {
     return this.api.patch<UpdateUserArgumentsDTO>(`/update-user/${data.id}`, { data });

@@ -1,11 +1,10 @@
 import { prismaClient } from '@config/prismaClient';
-import { GetProductsResultDTO } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function deleteDoctor(
   request: NextApiRequest,
   response: NextApiResponse
-): Promise<void | NextApiResponse<GetProductsResultDTO>> {
+): Promise<void | NextApiResponse> {
   if (request.method !== 'DELETE') return response.status(405).end();
 
   const { id } = request.query;

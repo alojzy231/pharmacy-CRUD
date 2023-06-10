@@ -1,16 +1,16 @@
 import { prismaClient } from '@config/prismaClient';
-import { GetHospitalsResultDTO, Role } from '@dto';
+import { Role } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { destroyCookie } from 'nookies';
 
 import { verifyAccessToken } from '@api/utils/verifyAccessToken';
 import { ACCESS_TOKEN } from '@const/cookies';
 
-export default async function getUsers(
+export default async function deleteUser(
   request: NextApiRequest,
   response: NextApiResponse
-): Promise<void | NextApiResponse<GetHospitalsResultDTO>> {
-  if (request.method !== 'GET') return response.status(405).end();
+): Promise<void | NextApiResponse> {
+  if (request.method !== 'DELETE') return response.status(405).end();
 
   const { payload } = await verifyAccessToken(request);
 
@@ -20,19 +20,23 @@ export default async function getUsers(
     return response.status(401).end();
   }
 
-  try {
-    const data = await prismaClient.user.findMany();
+  const { id } = request.query;
 
-    const finalData = data.map(({ password: _password, ...restData }) => restData);
+  try {
+    await prismaClient.user.delete({
+      where: {
+        id: Number(id),
+      },
+    });
 
     prismaClient.$disconnect();
 
-    return response.status(200).json(finalData);
+    return response.status(200).end();
   } catch (error) {
     prismaClient.$disconnect();
 
-    console.error(`Error getting all hospitals: ${error}`);
+    console.error(`Error deleting a user: ${error}`);
 
-    return response.status(500).json({ error, message: 'Error getting all hospitals' });
+    return response.status(500).json({ error, message: 'Error deleting a user' });
   }
 }

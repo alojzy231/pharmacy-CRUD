@@ -1,4 +1,4 @@
-import { DeleteDoctorArgumentsDTO, DeleteProductArgumentsDTO } from '@dto';
+import { DeleteDoctorArgumentsDTO } from '@dto';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UseMutationResult } from '@tanstack/react-query/src/types';
 
@@ -12,7 +12,7 @@ const deleteDoctor = async (deleteDoctor: DeleteDoctorArgumentsDTO) => {
 export const useDeleteDoctor = (): UseMutationResult<
   unknown,
   unknown,
-  DeleteProductArgumentsDTO
+  DeleteDoctorArgumentsDTO
 > => {
   const queryClient = useQueryClient();
 

@@ -13,11 +13,13 @@ type EditRowProps<TFieldValues extends FieldValues> = {
     password: Path<TFieldValues>;
   };
   isLoading?: boolean;
+  onCancel: () => void;
 };
 export function EditRow<TFieldValues extends FieldValues>({
   control,
   isLoading,
   names,
+  onCancel,
 }: EditRowProps<TFieldValues>): JSX.Element {
   return (
     <tr>
@@ -39,8 +41,8 @@ export function EditRow<TFieldValues extends FieldValues>({
         />
       </td>
       <td>
-        <Button loading={isLoading} size="xs" type="submit">
-          Submit
+        <Button disabled={isLoading} onClick={onCancel} size="xs" variant="subtle">
+          Cancel
         </Button>
       </td>
     </tr>

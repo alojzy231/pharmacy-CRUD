@@ -24,7 +24,7 @@ class HospitalService extends PharmacyCRUDClientApiClient {
     return this.api.get<GetHospitalsResultDTO>('/get-hospitals');
   }
   deleteHospital(data: DeleteHospitalArgumentsDTO) {
-    return this.api.delete<DeleteHospitalArgumentsDTO>(`/delete-hospital/${data.id}`);
+    return this.api.delete(`/delete-hospital/${data.id}`);
   }
   updateHospital(data: UpdateHospitalArgumentsDTO) {
     return this.api.patch<UpdateHospitalArgumentsDTO>(`/update-hospital/${data.id}`, { data });
