@@ -1,7 +1,7 @@
 import { AppShell as MantineAppShell, Container, createStyles } from '@mantine/core';
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { PropsWithChildren } from 'react';
+import { Fragment, PropsWithChildren } from 'react';
 
 import { FadeInItem } from '@layout/AppShell/FadeInItem';
 
@@ -13,12 +13,15 @@ const useStyles = createStyles({
   },
 });
 
-export function AppShell({ children }: PropsWithChildren): JSX.Element {
+type AppShellProps = PropsWithChildren<{
+  withHeader?: boolean;
+}>;
+export function AppShell({ children, withHeader = true }: AppShellProps): JSX.Element {
   const { pathname } = useRouter();
   const { classes } = useStyles();
 
   return (
-    <MantineAppShell header={<Header />}>
+    <MantineAppShell header={withHeader ? <Header /> : <Fragment />}>
       <AnimatePresence initial={false} mode="wait">
         <FadeInItem className={classes.fadeInContainer} key={pathname}>
           <Container p={24} sx={{ display: 'flex', flexDirection: 'column' }}>
