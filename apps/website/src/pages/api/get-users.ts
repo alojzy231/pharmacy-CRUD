@@ -1,6 +1,10 @@
 import { prismaClient } from '@config/prismaClient';
-import { GetHospitalsResultDTO } from '@dto';
+import { GetHospitalsResultDTO, Role } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { destroyCookie } from 'nookies';
+
+import { verifyAccessToken } from '@api/utils/verifyAccessToken';
+import { ACCESS_TOKEN } from '@const/cookies';
 
 export default async function getUsers(
   request: NextApiRequest,
@@ -9,11 +13,21 @@ export default async function getUsers(
   if (request.method !== 'GET') return response.status(405).end();
 
   try {
+    const { payload } = await verifyAccessToken(request);
+
+    if (payload.role !== Role.ADMIN) {
+      destroyCookie({ res: response }, ACCESS_TOKEN);
+
+      return response.status(401).end();
+    }
+
     const data = await prismaClient.user.findMany();
+
+    const finalData = data.map(({ password: _password, ...restData }) => restData);
 
     prismaClient.$disconnect();
 
-    return response.status(200).json(data);
+    return response.status(200).json(finalData);
   } catch (error) {
     prismaClient.$disconnect();
 
