@@ -23,5 +23,5 @@ export function middleware(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api/auth).*)(.+)'],
+  matcher: ['/((?!_next|api).*)(.+)'],
 };
