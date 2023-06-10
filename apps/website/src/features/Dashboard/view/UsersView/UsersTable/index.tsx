@@ -131,8 +131,8 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
                   <td>********</td>
                   <td>
                     <Menu
-                      isAdmin={data[Number(row.id)].role === Role.ADMIN}
                       isLoading={isLoadingDeletingUser}
+                      isOwner={data[Number(row.id)].role === Role.OWNER}
                       onEdit={() => setUpdatingUserId(row.id)}
                       onRemove={() => deleteUser({ id: Number(row.id) })}
                     />

@@ -1,22 +1,17 @@
 import { prismaClient } from '@config/prismaClient';
-import { Role, UpdateUserArgumentsDTO } from '@dto';
+import { UpdateUserArgumentsDTO } from '@dto';
 import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { destroyCookie } from 'nookies';
 
-import { verifyAccessToken } from '@api/utils/verifyAccessToken';
-import { ACCESS_TOKEN } from '@const/cookies';
+import { hasAdminPermissions } from '@api/utils/hasAdminPermissions';
 
 export default async function updateUser(
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void | NextApiResponse> {
   if (request.method !== 'PATCH') return response.status(405).end();
-  const { payload } = await verifyAccessToken(request);
 
-  if (payload.role !== Role.ADMIN) {
-    destroyCookie({ res: response }, ACCESS_TOKEN);
-
+  if (!(await hasAdminPermissions(request, response))) {
     return response.status(401).end();
   }
 
