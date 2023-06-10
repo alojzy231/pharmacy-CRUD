@@ -15,7 +15,11 @@ export class Config<TValidationSchema extends ZodObject<ZodRawShape>> {
     const result = this.validationSchema.safeParse(config);
 
     if (!result.success) {
-      throw new Error(`Configuration validation error: ${result.error.message}`);
+      if (typeof window === 'undefined') {
+        throw new TypeError(`Configuration validation error: ${result.error.message}`);
+      }
+
+      return {} as this['config'];
     }
 
     return result.data;

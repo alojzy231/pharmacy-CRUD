@@ -1,4 +1,3 @@
-import { Role } from '@dto';
 import {
   Avatar,
   createStyles,
@@ -14,6 +13,7 @@ import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 
+import { isRoleValidWithAdminPermissions } from '@api/utils/hasAdminPermissions';
 import { ACCESS_TOKEN } from '@const/cookies';
 import { Route } from '@const/route';
 
@@ -55,7 +55,7 @@ export function ProfileInfo(): JSX.Element {
             </UnstyledButton>
           </Menu.Target>
           <Menu.Dropdown>
-            {data.role === Role.ADMIN && (
+            {isRoleValidWithAdminPermissions(data.role) && (
               <Menu.Item icon={<IconUsers size={14} />}>
                 <NextLink className={classes.link} href={Route.Users}>
                   Users

@@ -13,7 +13,7 @@ export function LoginView(): JSX.Element {
   const { isLoading, mutateAsync: login } = useLogin();
   const router = useRouter();
 
-  const { control, handleSubmit } = useForm<FieldValues>({
+  const { control, handleSubmit, setError } = useForm<FieldValues>({
     defaultValues,
     resolver: zodResolver(schema),
   });
@@ -25,6 +25,11 @@ export function LoginView(): JSX.Element {
       router.push(Route.Product);
     } catch (error) {
       console.error(error);
+
+      setError('password', {
+        message: 'Invalid email or password',
+        type: 'manual',
+      });
     }
   };
 
