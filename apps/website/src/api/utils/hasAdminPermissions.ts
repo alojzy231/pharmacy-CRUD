@@ -18,7 +18,7 @@ export async function hasAdminPermissions(
 ): Promise<boolean> {
   const { payload } = await verifyAccessToken(request);
 
-  if (isRoleValidWithAdminPermissions(payload.role)) {
+  if (!isRoleValidWithAdminPermissions(payload.role)) {
     destroyCookie({ res: response }, ACCESS_TOKEN);
 
     return false;
