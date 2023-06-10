@@ -11,14 +11,10 @@ export const schema = z
     quantity: z.number().min(1).step(1),
     type: z.nativeEnum(ProductType),
   })
-  .refine(
-    ({ doctorId, isPrescriptionNeeded }) => {
-      if (isPrescriptionNeeded && !doctorId) {
-        return false;
-      }
-    },
-    { message: 'If prescription is needed, doctor must be selected', path: ['doctorId'] }
-  );
+  .refine(({ doctorId, isPrescriptionNeeded }) => isPrescriptionNeeded && doctorId !== undefined, {
+    message: 'If prescription is needed, doctor must be selected',
+    path: ['doctorId'],
+  });
 
 export type FieldValues = z.infer<typeof schema>;
 
