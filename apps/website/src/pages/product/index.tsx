@@ -1,1 +1,1 @@
-export { MainView as default } from '@features/Dashboard/view/MainView';
+export { ProductView as default } from 'features/Dashboard/view/ProductView';

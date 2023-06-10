@@ -4,7 +4,7 @@ import { router } from 'next/client';
 import { Route } from '@const/route';
 import { useUpdateProduct } from '@features/Dashboard/api/mutations/useUpdateProduct';
 import { useGetProduct } from '@features/Dashboard/api/queries/useGetProduct';
-import { ProductForm } from '@features/Dashboard/view/MainView/ProductForm';
+import { ProductForm } from '@features/Dashboard/view/ProductView/ProductForm';
 
 type FormProps = {
   id: string;

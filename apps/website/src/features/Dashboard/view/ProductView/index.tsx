@@ -2,11 +2,11 @@ import { Box, Title } from '@mantine/core';
 
 import { useAddProduct } from '@features/Dashboard/api/mutations/useAddProduct';
 import { useGetProducts } from '@features/Dashboard/api/queries/useGetProducts';
-import { ProductForm } from '@features/Dashboard/view/MainView/ProductForm';
+import { ProductForm } from '@features/Dashboard/view/ProductView/ProductForm';
 
 import { ProductsTable } from './ProductsTable';
 
-export function MainView(): JSX.Element {
+export function ProductView(): JSX.Element {
   const { isLoading, mutateAsync: addProduct } = useAddProduct();
   const { data } = useGetProducts();
 

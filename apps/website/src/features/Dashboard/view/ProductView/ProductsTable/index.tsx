@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-table';
 
 import { UseGetProductsResult } from '@features/Dashboard/api/queries/useGetProducts';
-import { Menu } from '@features/Dashboard/view/MainView/ProductsTable/components/Menu';
+import { Menu } from '@features/Dashboard/view/ProductView/ProductsTable/components/Menu';
 
 type Product = UseGetProductsResult[number];
 

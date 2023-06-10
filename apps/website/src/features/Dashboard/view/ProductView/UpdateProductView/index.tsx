@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { Route } from '@const/route';
 import { useUpdateProduct } from '@features/Dashboard/api/mutations/useUpdateProduct';
-import { ProductForm } from '@features/Dashboard/view/MainView/ProductForm';
+import { ProductForm } from '@features/Dashboard/view/ProductView/ProductForm';
 import { WithGetUpdateDataResultData } from '@hocs/withGetUpdateData';
 
 export function UpdateProductView({

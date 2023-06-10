@@ -9,7 +9,7 @@ import {
   ControlledTextInput,
   ControlledCostInput,
 } from '@components/ControlledInputs';
-import { ControlledDoctorSelectInput } from '@features/Dashboard/view/MainView/ProductForm/components/ControlledDoctorSelectInput';
+import { ControlledDoctorSelectInput } from '@features/Dashboard/view/ProductView/ProductForm/components/ControlledDoctorSelectInput';
 
 import { CATEGORIES, TYPES } from './const';
 import { FieldValues, schema, defaultValues as emptyDefaultValues } from './schema';
