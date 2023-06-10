@@ -1,5 +1,6 @@
 import { prismaClient } from '@config/prismaClient';
 import { Role } from '@dto';
+import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { destroyCookie } from 'nookies';
 
@@ -24,7 +25,10 @@ export default async function addUser(
     const { data } = request.body;
 
     await prismaClient.user.create({
-      data,
+      data: {
+        ...data,
+        password: bcrypt.hashSync(data.password, 10),
+      },
     });
 
     prismaClient.$disconnect();

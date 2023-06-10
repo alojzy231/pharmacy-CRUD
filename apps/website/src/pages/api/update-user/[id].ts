@@ -1,5 +1,6 @@
 import { prismaClient } from '@config/prismaClient';
 import { Role, UpdateUserArgumentsDTO } from '@dto';
+import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { destroyCookie } from 'nookies';
 
@@ -24,7 +25,10 @@ export default async function updateUser(
 
   try {
     await prismaClient.user.update({
-      data: restData,
+      data: {
+        ...restData,
+        password: bcrypt.hashSync(data.password, 10),
+      },
       where: {
         id,
       },
