@@ -1,15 +1,24 @@
 import { ProductCategory, ProductType } from '@dto';
 import z from 'zod';
 
-export const schema = z.object({
-  category: z.nativeEnum(ProductCategory),
-  doctorId: z.string().min(1).transform(Number),
-  isPrescriptionNeeded: z.boolean(),
-  name: z.string().min(1),
-  price: z.number().min(0.1),
-  quantity: z.number().min(1).step(1),
-  type: z.nativeEnum(ProductType),
-});
+export const schema = z
+  .object({
+    category: z.nativeEnum(ProductCategory),
+    doctorId: z.string().min(1).transform(Number).nullable().optional(),
+    isPrescriptionNeeded: z.boolean(),
+    name: z.string().min(1),
+    price: z.number().min(0.1),
+    quantity: z.number().min(1).step(1),
+    type: z.nativeEnum(ProductType),
+  })
+  .refine(
+    ({ doctorId, isPrescriptionNeeded }) => {
+      if (isPrescriptionNeeded && !doctorId) {
+        return false;
+      }
+    },
+    { message: 'If prescription is needed, doctor must be selected', path: ['doctorId'] }
+  );
 
 export type FieldValues = z.infer<typeof schema>;
 
