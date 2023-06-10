@@ -4,16 +4,14 @@ import {
   Group,
   createStyles,
   Box,
-  Button,
 } from '@mantine/core';
 import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
-import { destroyCookie } from 'nookies';
 import { ReactElement, Suspense } from 'react';
 
-import { ACCESS_TOKEN } from '@const/cookies';
 import { Route } from '@const/route';
+
+import { ProfileInfo } from './ProfileInfo';
 
 const SearchBar = dynamic(() => import('./SearchBar'), {
   loading: () => <Box w={212} />,
@@ -41,26 +39,10 @@ const useStyles = createStyles({
 type HeaderProps = Omit<MantineHeaderProps, 'height' | 'children' | 'display'>;
 export function Header(props: HeaderProps): ReactElement {
   const { classes } = useStyles();
-  const router = useRouter();
-
-  const onLogout = () => {
-    destroyCookie(null, ACCESS_TOKEN);
-
-    router.push(Route.Login);
-  };
 
   return (
     <MantineHeader display="flex" height={60} {...props}>
-      <Group position="center" w={212}>
-        <Button
-          gradient={{ deg: 35, from: '#ed6ea0', to: '#ec8c69' }}
-          my="auto"
-          onClick={onLogout}
-          variant="gradient"
-        >
-          Logout
-        </Button>
-      </Group>
+      <ProfileInfo />
       <Group m="auto" spacing={32}>
         {ROUTES.map(({ href, label }) => (
           <NextLink className={classes.link} href={href} key={href}>
