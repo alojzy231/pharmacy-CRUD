@@ -1,37 +1,40 @@
+import { User } from '@dto';
 import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { parseCookies } from 'nookies';
+
+import { ACCESS_TOKEN } from '@const/cookies';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET as string;
 
-async function verifyToken(token: string): Promise<unknown> {
+async function verifyToken(token: string): Promise<{ payload: User }> {
   return new Promise((resolve, reject) => {
     jwt.verify(token, ACCESS_TOKEN_SECRET, (error, payload) => {
       if (error) {
         return reject(error);
       }
-      resolve(payload);
+      resolve(payload as { payload: User });
     });
   });
 }
-export default async function verifyAccessToken(
+export default async function getRole(
   request: NextApiRequest,
   response: NextApiResponse
-): Promise<NextApiResponse> {
+): Promise<void | NextApiResponse> {
   if (request.method !== 'GET') return response.status(405).end();
 
-  if (!request.headers.authorization) {
-    return response.status(401).end();
-  }
-  const token = request.headers.authorization.split(' ')[1];
+  const { [ACCESS_TOKEN]: accessToken } = parseCookies({ req: request });
 
-  if (!token) {
+  if (!accessToken) {
     return response.status(401).end();
   }
 
   try {
-    await verifyToken(token);
+    const {
+      payload: { role },
+    } = await verifyToken(accessToken);
 
-    return response.status(200).end();
+    return response.status(200).json({ role });
   } catch {
     return response.status(401).end();
   }
