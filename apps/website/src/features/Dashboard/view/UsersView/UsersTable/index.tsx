@@ -10,6 +10,8 @@ import {
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useAddUser } from '@features/Dashboard/api/mutations/useAddUser';
+
 import { EditRow } from './EditRow';
 import { defaultValues, FieldValues, schema } from './schema';
 
@@ -46,11 +48,8 @@ type UserTableProps = TableProps & {
 export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element {
   const [isAddingUser, setIsAddingUser] = useState(false);
 
-  const {
-    control,
-    formState: { isLoading },
-    handleSubmit,
-  } = useForm<FieldValues>({
+  const { isLoading, mutateAsync: addUser } = useAddUser();
+  const { control, handleSubmit } = useForm<FieldValues>({
     defaultValues,
     resolver: zodResolver(schema),
   });
@@ -61,9 +60,14 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
-    setIsAddingUser(false);
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      await addUser(data);
+
+      setIsAddingUser(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
