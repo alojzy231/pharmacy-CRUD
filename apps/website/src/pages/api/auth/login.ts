@@ -23,32 +23,42 @@ function signAccessToken(payload: LoginArgumentsDTO): Promise<string> {
 export default async function login(
   request: NextApiRequest,
   response: NextApiResponse
-): Promise<NextApiResponse> {
+): Promise<void | NextApiResponse> {
   if (request.method !== 'POST') return response.status(405).end();
 
   const { email, password }: LoginArgumentsDTO = request.body.data;
 
-  const user = await prismaClient.user.findUnique({
-    where: {
-      email,
-    },
-  });
+  try {
+    const user = await prismaClient.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-  if (!user) {
-    return response.status(401).end();
+    if (!user) {
+      return response.status(401).end();
+    }
+
+    const checkPassword = bcrypt.compareSync(password, user.password);
+
+    if (!checkPassword) {
+      return response.status(401).end();
+    }
+    const accessToken = await signAccessToken(user);
+
+    setCookie({ res: response }, ACCESS_TOKEN, accessToken, {
+      maxAge: 24 * 60 * 60, // 1 day
+      path: '/',
+    });
+
+    prismaClient.$disconnect();
+
+    return response.status(200).end();
+  } catch (error) {
+    prismaClient.$disconnect();
+
+    console.error(`Error while login: ${error}`);
+
+    return response.status(500).json({ error, message: 'Error while login' });
   }
-
-  const checkPassword = bcrypt.compareSync(password, user.password);
-
-  if (!checkPassword) {
-    return response.status(401).end();
-  }
-  const accessToken = await signAccessToken(user);
-
-  setCookie({ res: response }, ACCESS_TOKEN, accessToken, {
-    maxAge: 24 * 60 * 60, // 1 day
-    path: '/',
-  });
-
-  return response.status(200).end();
 }
