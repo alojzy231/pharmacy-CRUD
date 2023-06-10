@@ -24,6 +24,7 @@ const ROUTES = [
   { href: Route.Product, label: 'Product' },
   { href: Route.Hospital, label: 'Hospital' },
   { href: Route.Doctor, label: 'Doctor' },
+  { href: Route.Users, label: 'Users' },
 ];
 
 const useStyles = createStyles({

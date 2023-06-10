@@ -3,4 +3,5 @@ export const Route = {
   Hospital: '/hospital',
   Login: '/',
   Product: '/product',
+  Users: '/users',
 };
