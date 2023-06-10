@@ -24,7 +24,7 @@ export default async function login(
 ): Promise<NextApiResponse> {
   if (request.method !== 'POST') return response.status(405).end();
 
-  const { email, password }: LoginArgumentsDTO = request.body;
+  const { email, password }: LoginArgumentsDTO = request.body.data;
 
   const user = await prismaClient.user.findUnique({
     where: {
