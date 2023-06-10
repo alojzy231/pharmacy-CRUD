@@ -1,5 +1,5 @@
 import { Group, Text } from '@mantine/core';
-import { forwardRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { ControlledSelect, ControlledSelectInputProps } from '@components/ControlledInputs';
@@ -9,14 +9,15 @@ import {
   UseGetHospitalsSelectInputDataResult,
 } from './useGetHospitalsSelectInputData';
 
-type ItemComponentProps = UseGetHospitalsSelectInputDataResult[number];
+type ItemComponentProps = ComponentPropsWithoutRef<'div'> &
+  UseGetHospitalsSelectInputDataResult[number];
 
 const ItemComponent = forwardRef<HTMLDivElement, ItemComponentProps>(function ItemComponent(
-  { description, label }: ItemComponentProps,
+  { description, label, ...restProps }: ItemComponentProps,
   reference
 ): JSX.Element {
   return (
-    <div ref={reference}>
+    <div ref={reference} {...restProps}>
       <Group noWrap>
         <div>
           <Text size="sm">{label}</Text>

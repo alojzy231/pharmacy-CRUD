@@ -1,5 +1,5 @@
 import { Group, Text } from '@mantine/core';
-import { forwardRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { ControlledSelect, ControlledSelectInputProps } from '@components/ControlledInputs';
@@ -9,7 +9,8 @@ import {
   UseGetDoctorsSelectInputDataResult,
 } from './useGetDoctorsSelectInputData';
 
-type ItemComponentProps = UseGetDoctorsSelectInputDataResult[number];
+type ItemComponentProps = ComponentPropsWithoutRef<'div'> &
+  UseGetDoctorsSelectInputDataResult[number];
 
 const ItemComponent = forwardRef<HTMLDivElement, ItemComponentProps>(function ItemComponent(
   { description, label, ...restProps }: ItemComponentProps,
