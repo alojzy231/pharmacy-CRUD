@@ -10,7 +10,7 @@ export function UsersView(): JSX.Element {
   return (
     <>
       <Title mx="auto">Users</Title>
-      {isLoading || !data ? 'Loading...' : <UsersTable />}
+      {isLoading || !data ? 'Loading...' : <UsersTable data={data} />}
     </>
   );
 }
