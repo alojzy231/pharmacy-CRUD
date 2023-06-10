@@ -1,4 +1,4 @@
-import { GetUsersResultDTO } from '@dto';
+import { GetUsersResultDTO, Role } from '@dto';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Group, Table, TableProps } from '@mantine/core';
 import {
@@ -131,6 +131,7 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
                   <td>********</td>
                   <td>
                     <Menu
+                      isAdmin={data[Number(row.id)].role === Role.ADMIN}
                       isLoading={isLoadingDeletingUser}
                       onEdit={() => setUpdatingUserId(row.id)}
                       onRemove={() => deleteUser({ id: Number(row.id) })}

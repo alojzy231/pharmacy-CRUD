@@ -1,5 +1,5 @@
-import { apiConfig } from '@config/apiConfig';
 import { prismaClient } from '@config/prismaClient';
+import { serverConfig } from '@config/serverConfig';
 import { LoginArgumentsDTO } from '@dto';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -10,7 +10,7 @@ import { ACCESS_TOKEN } from '@const/cookies';
 
 function signAccessToken(payload: LoginArgumentsDTO): Promise<string> {
   return new Promise((resolve, reject) => {
-    jwt.sign({ payload }, apiConfig.ACCESS_TOKEN_SECRET, {}, (error, token) => {
+    jwt.sign({ payload }, serverConfig.ACCESS_TOKEN_SECRET, {}, (error, token) => {
       if (error) {
         reject(error);
       }

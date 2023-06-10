@@ -5,9 +5,10 @@ type TableMenuProps = {
   onRemove: () => void;
   onEdit: () => void;
   isLoading?: boolean;
+  isAdmin: boolean;
 };
 
-export function Menu({ isLoading, onEdit, onRemove }: TableMenuProps): JSX.Element {
+export function Menu({ isAdmin, isLoading, onEdit, onRemove }: TableMenuProps): JSX.Element {
   if (isLoading) return <Loader size={16} />;
 
   return (
@@ -22,9 +23,11 @@ export function Menu({ isLoading, onEdit, onRemove }: TableMenuProps): JSX.Eleme
         <MantineMenu.Item icon={<IconEdit size={14} />} onClick={onEdit}>
           Edit
         </MantineMenu.Item>
-        <MantineMenu.Item color="red" icon={<IconTrash size={14} />} onClick={onRemove}>
-          Remove
-        </MantineMenu.Item>
+        {!isAdmin && (
+          <MantineMenu.Item color="red" icon={<IconTrash size={14} />} onClick={onRemove}>
+            Remove
+          </MantineMenu.Item>
+        )}
       </MantineMenu.Dropdown>
     </MantineMenu>
   );

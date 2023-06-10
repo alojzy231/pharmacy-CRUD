@@ -1,10 +1,10 @@
-import { apiConfig } from '@config/apiConfig';
+import { serverConfig } from '@config/serverConfig';
 import { PrismaClient } from '@prisma/client';
 
 export const prismaClient = new PrismaClient({
   datasources: {
     db: {
-      url: apiConfig.DATABASE_URL,
+      url: serverConfig.DATABASE_URL,
     },
   },
 });

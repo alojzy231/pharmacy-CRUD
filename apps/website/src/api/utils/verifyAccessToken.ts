@@ -1,4 +1,4 @@
-import { apiConfig } from '@config/apiConfig';
+import { serverConfig } from '@config/serverConfig';
 import { User } from '@dto';
 import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextPageContext } from 'next';
@@ -17,7 +17,7 @@ export async function verifyAccessToken(
   }
 
   return new Promise((resolve, reject) => {
-    jwt.verify(accessToken, apiConfig.ACCESS_TOKEN_SECRET, (error, payload) => {
+    jwt.verify(accessToken, serverConfig.ACCESS_TOKEN_SECRET, (error, payload) => {
       if (error) {
         return reject(error);
       }
