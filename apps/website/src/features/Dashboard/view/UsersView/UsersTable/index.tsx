@@ -1,11 +1,24 @@
 import { GetUsersResultDTO } from '@dto';
-import { Table, TableProps } from '@mantine/core';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Table, TableProps } from '@mantine/core';
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { EditRow } from './EditRow';
+import { defaultValues, FieldValues, schema } from './schema';
+
+const FORM_NAMES = {
+  email: 'email',
+  name: 'name',
+  password: 'password',
+  role: 'role',
+} as const;
 
 type User = GetUsersResultDTO[number];
 
@@ -18,11 +31,11 @@ const columns = [
   }),
   columnHelper.accessor('email', {
     cell: (info) => info.getValue(),
-    header: () => <span>City</span>,
+    header: () => <span>Email</span>,
   }),
   columnHelper.accessor('role', {
     cell: (info) => info.getValue(),
-    header: () => <span>Street name</span>,
+    header: () => <span>Role</span>,
   }),
 ];
 
@@ -31,34 +44,64 @@ type UserTableProps = TableProps & {
 };
 
 export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element {
+  const [isAddingUser, setIsAddingUser] = useState(false);
+
+  const {
+    control,
+    formState: { isLoading },
+    handleSubmit,
+  } = useForm<FieldValues>({
+    defaultValues,
+    resolver: zodResolver(schema),
+  });
+
   const table = useReactTable({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+    setIsAddingUser(false);
+  };
+
   return (
-    <Table {...restProps}>
-      <thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {flexRender(header.column.columnDef.header, header.getContext())}
-              </th>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Table {...restProps}>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </th>
+                ))}
+                <th>Password</th>
+                <th />
+              </tr>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                ))}
+                <td>********</td>
+                <td />
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+            {isAddingUser && <EditRow control={control} isLoading={isLoading} names={FORM_NAMES} />}
+          </tbody>
+        </Table>
+      </form>
+      {!isAddingUser && (
+        <Button mt={24} onClick={() => setIsAddingUser(true)} variant="outline">
+          Add User
+        </Button>
+      )}
+    </>
   );
 }
