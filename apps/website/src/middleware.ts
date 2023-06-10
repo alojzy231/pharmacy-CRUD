@@ -7,6 +7,10 @@ import { Route } from '@const/route';
 export function middleware(request: NextRequest): NextResponse {
   const accessToken = request.cookies.get(ACCESS_TOKEN);
 
+  if (accessToken && request.nextUrl.pathname === Route.Login) {
+    return NextResponse.redirect(new URL(Route.Product, request.url));
+  }
+
   // Unauthorised user (no session token) - redirect to Login page
   if (!accessToken) {
     return NextResponse.redirect(new URL(Route.Login, request.url));
@@ -23,5 +27,5 @@ export function middleware(request: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api).*)(.+)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
