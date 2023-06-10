@@ -7,6 +7,7 @@ import {
   ControlledNumberInput,
   ControlledSelect,
   ControlledTextInput,
+  ControlledCostInput,
 } from '@components/ControlledInputs';
 import { ControlledDoctorSelectInput } from '@features/Dashboard/view/MainView/ProductForm/components/ControlledDoctorSelectInput';
 
@@ -49,7 +50,7 @@ export function ProductForm({
           label="Name"
           name="name"
           placeholder="Name of the drug"
-          required
+          withAsterisk
         />
         <ControlledSelect
           control={control}
@@ -57,7 +58,7 @@ export function ProductForm({
           label="Type"
           name="type"
           placeholder="Type of the drug"
-          required
+          withAsterisk
         />
         <ControlledSelect
           control={control}
@@ -65,7 +66,7 @@ export function ProductForm({
           label="Category"
           name="category"
           placeholder="Category of the type"
-          required
+          withAsterisk
         />
         <ControlledNumberInput
           control={control}
@@ -73,22 +74,14 @@ export function ProductForm({
           min={1}
           name="quantity"
           placeholder="Quantity of the drug"
-          required
+          withAsterisk
         />
-        <ControlledNumberInput
+        <ControlledCostInput
           control={control}
-          formatter={(value) =>
-            Number.isNaN(Number.parseFloat(value))
-              ? '$ '
-              : `$ ${value}`.replaceAll(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
-          }
           label="Price"
           name="price"
-          parser={(value) => value.replaceAll(/\$\s?|(,*)/g, '')}
           placeholder="Price of the drug"
-          precision={2}
-          required
-          step={0.01}
+          withAsterisk
         />
         <ControlledCheckbox
           control={control}

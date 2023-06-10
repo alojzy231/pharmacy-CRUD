@@ -40,28 +40,28 @@ export function HospitalForm({
           label="Name"
           name="name"
           placeholder="Name of the hospital"
-          required
+          withAsterisk
         />
         <ControlledTextInput
           control={control}
           label="City"
           name="city"
           placeholder="Name of the city"
-          required
+          withAsterisk
         />
         <ControlledTextInput
           control={control}
           label="Street name"
           name="streetName"
           placeholder="Name of the street"
-          required
+          withAsterisk
         />
         <ControlledTextInput
           control={control}
           label="Address"
           name="address"
           placeholder="Address of the hospital"
-          required
+          withAsterisk
         />
         <Button fullWidth loading={isLoading} type="submit">
           Submit
