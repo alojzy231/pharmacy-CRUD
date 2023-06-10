@@ -6,7 +6,7 @@ import { productService } from '@api/services/ProductService';
 
 import { productsKey } from '../../queries/useGetProducts';
 
-const addProduct = async (updateProduct: UpdateProductArgumentsDTO) => {
+const updateProduct = async (updateProduct: UpdateProductArgumentsDTO) => {
   await productService.updateProduct(updateProduct);
 };
 
@@ -17,7 +17,7 @@ export const useUpdateProduct = (): UseMutationResult<
 > => {
   const queryClient = useQueryClient();
 
-  return useMutation(addProduct, {
+  return useMutation(updateProduct, {
     onSuccess: () => {
       queryClient.invalidateQueries(productsKey.details());
     },

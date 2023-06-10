@@ -6,7 +6,7 @@ import { hospitalService } from '@api/services/HospitalService';
 
 import { hospitalsKey } from '../../queries/useGetHospitals';
 
-const addHospital = async (updateHospital: UpdateHospitalArgumentsDTO) => {
+const updateHospital = async (updateHospital: UpdateHospitalArgumentsDTO) => {
   await hospitalService.updateHospital(updateHospital);
 };
 
@@ -17,7 +17,7 @@ export const useUpdateHospital = (): UseMutationResult<
 > => {
   const queryClient = useQueryClient();
 
-  return useMutation(addHospital, {
+  return useMutation(updateHospital, {
     onSuccess: () => {
       queryClient.invalidateQueries(hospitalsKey.details());
     },
