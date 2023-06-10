@@ -1,5 +1,6 @@
+import { Role } from '@dto';
 import { Avatar, Group, Loader, Menu, Stack, Text, UnstyledButton } from '@mantine/core';
-import { IconLogout } from '@tabler/icons-react';
+import { IconLogout, IconUsers } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 
@@ -16,6 +17,10 @@ export function ProfileInfo(): JSX.Element {
     destroyCookie(null, ACCESS_TOKEN);
 
     router.push(Route.Login);
+  };
+
+  const onUserRedirect = () => {
+    router.push(Route.Users);
   };
 
   return (
@@ -36,6 +41,11 @@ export function ProfileInfo(): JSX.Element {
             </UnstyledButton>
           </Menu.Target>
           <Menu.Dropdown>
+            {data.role === Role.ADMIN && (
+              <Menu.Item icon={<IconUsers size={14} />} onClick={onUserRedirect}>
+                Users
+              </Menu.Item>
+            )}
             <Menu.Item color="red" icon={<IconLogout size={14} />} onClick={onLogout}>
               Logout
             </Menu.Item>

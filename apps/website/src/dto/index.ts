@@ -11,4 +11,5 @@ export {
   type Hospital,
   type Doctor,
   type User,
+  Role,
 } from '@prisma/client';
