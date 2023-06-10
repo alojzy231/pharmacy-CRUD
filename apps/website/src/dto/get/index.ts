@@ -6,4 +6,4 @@ export * from './getProduct.types';
 export * from './getDoctor.types';
 export * from './getHospital.types';
 export * from './getUsers.types';
-export * from './getRole.types';
+export * from './getMe.types';

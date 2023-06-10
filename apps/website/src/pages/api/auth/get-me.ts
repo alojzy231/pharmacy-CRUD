@@ -17,7 +17,7 @@ async function verifyToken(token: string): Promise<{ payload: User }> {
     });
   });
 }
-export default async function getRole(
+export default async function getMe(
   request: NextApiRequest,
   response: NextApiResponse
 ): Promise<void | NextApiResponse> {
@@ -30,11 +30,11 @@ export default async function getRole(
   }
 
   try {
-    const {
-      payload: { role },
-    } = await verifyToken(accessToken);
+    const { payload } = await verifyToken(accessToken);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _password, ...restData } = payload;
 
-    return response.status(200).json({ role });
+    return response.status(200).json(restData);
   } catch {
     return response.status(401).end();
   }
