@@ -73,7 +73,8 @@ export function UsersTable({ data, ...restProps }: UserTableProps): JSX.Element 
 
   useEffect(() => {
     if (!!updatingUserId) {
-      reset(data[Number(updatingUserId)]);
+      console.log('assaa', data[Number(updatingUserId)]);
+      reset({ ...data[Number(updatingUserId)], password: '' });
     }
   }, [updatingUserId]);
 
