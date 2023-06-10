@@ -1,51 +1,26 @@
-import { SEARCH_RESULT_KEYS, SearchResultDTO } from '@dto';
+import { GET_ALL_KEYS, GetAllResultDTO } from '@dto';
 import { SpotlightAction } from '@mantine/spotlight';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { convertEnumToString } from '@utils/convertEnumToString';
 import { NextRouter, useRouter } from 'next/router';
 
 import { searchService } from '@api/services/SearchService';
-import { Route } from '@const/route';
 
-export const searchKey = {
-  all: ['hospitals'] as const,
-  details: () => [...searchKey.all, 'details'] as const,
+import { convertDoctors, convertHospitals, convertProducts } from './utils';
+
+export const getAllKey = {
+  all: ['getAll'] as const,
+  details: () => [...getAllKey.all, 'details'] as const,
 };
 
-type UseGetAllResult = SpotlightAction[];
+export type UseGetAllResult = SpotlightAction[];
 
-const select = (data: SearchResultDTO, redirect: NextRouter['push']): UseGetAllResult => {
-  const array = Object.entries(data).flatMap(([key, value]) => {
-    if (key === SEARCH_RESULT_KEYS.product) {
-      const products = Array.isArray(value) ? (value as SearchResultDTO['product']) : [value];
+const select = (data: GetAllResultDTO, redirect: NextRouter['push']): UseGetAllResult => {
+  if (Array.isArray(data)) return [];
+  const products = convertProducts(data[GET_ALL_KEYS.product], redirect);
+  const doctors = convertDoctors(data[GET_ALL_KEYS.doctor], redirect);
+  const hospitals = convertHospitals(data[GET_ALL_KEYS.hospital], redirect);
 
-      return products.map(({ category, id, name, type }) => ({
-        description: `${convertEnumToString(category)}, ${convertEnumToString(type)}`,
-        onTrigger: () => redirect(`${Route.Product}/${id}`),
-        title: `Product: ${name}`,
-      }));
-    }
-
-    if (key === SEARCH_RESULT_KEYS.doctor) {
-      const doctors = Array.isArray(value) ? (value as SearchResultDTO['doctor']) : [value];
-
-      return doctors.map(({ hospital, id, lastName, name, profession }) => ({
-        description: `${convertEnumToString(profession)}, ${hospital.name}`,
-        onTrigger: () => redirect(`${Route.Doctor}/${id}`),
-        title: `Doctor: ${name} ${lastName}`,
-      }));
-    }
-
-    const hospitals = Array.isArray(value) ? (value as SearchResultDTO['hospital']) : [value];
-
-    return hospitals.map(({ address, city, id, name, streetName }) => ({
-      description: `${city}, ${streetName}, ${address} `,
-      onTrigger: () => redirect(`${Route.Hospital}/${id}`),
-      title: `Hospital: ${name}`,
-    }));
-  });
-
-  return array.length === 0 ? [] : array;
+  return [...products, ...doctors, ...hospitals];
 };
 
 const getAll = async () => {
@@ -57,5 +32,7 @@ const getAll = async () => {
 export const useGetAll = (): UseQueryResult<UseGetAllResult> => {
   const router = useRouter();
 
-  return useQuery(searchKey.details(), getAll, { select: (data) => select(data, router.push) });
+  return useQuery(getAllKey.details(), getAll, {
+    select: (data) => select(data, router.push),
+  });
 };

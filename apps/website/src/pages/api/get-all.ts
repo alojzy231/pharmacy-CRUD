@@ -1,4 +1,5 @@
 import { prismaClient } from '@config/prismaClient';
+import { GetAllResultDTO } from '@dto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function getAll(
@@ -18,13 +19,15 @@ export default async function getAll(
       },
     });
 
-    prismaClient.$disconnect();
-
-    return response.status(200).json({
+    const data: GetAllResultDTO = {
       doctor: doctorData,
       hospital: hospitalData,
       product: productData,
-    });
+    };
+
+    prismaClient.$disconnect();
+
+    return response.status(200).json(data);
   } catch (error) {
     prismaClient.$disconnect();
 

@@ -1,12 +1,17 @@
-import { Box, TextInput } from '@mantine/core';
+import { Group, Loader, TextInput } from '@mantine/core';
 import { spotlight, SpotlightProvider } from '@mantine/spotlight';
 
 import { useGetAll } from './useGetAll';
 
 export default function SearchBar(): JSX.Element {
-  const { data } = useGetAll();
+  const { data, isLoading } = useGetAll();
 
-  if (data === undefined) return <Box w={212}>Loading...</Box>;
+  if (data === undefined || isLoading)
+    return (
+      <Group align="center" position="center" w={212}>
+        <Loader size={16} />
+      </Group>
+    );
 
   return (
     <SpotlightProvider

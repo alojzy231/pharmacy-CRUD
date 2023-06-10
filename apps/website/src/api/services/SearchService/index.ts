@@ -1,4 +1,4 @@
-import { SearchResultDTO } from '@dto';
+import { GetAllResultDTO } from '@dto';
 
 import { PharmacyCRUDClientApiClient } from '@api/clients/PharmacyCRUDClient';
 
@@ -8,7 +8,7 @@ class SearchService extends PharmacyCRUDClientApiClient {
   }
 
   getAll() {
-    return this.api.get<SearchResultDTO>(`/get-all`);
+    return this.api.get<GetAllResultDTO>(`/get-all`);
   }
 }
 
