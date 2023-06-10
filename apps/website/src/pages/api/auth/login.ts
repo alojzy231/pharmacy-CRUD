@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { setCookie } from 'nookies';
 
+import { ACCESS_TOKEN } from '@const/cookies';
+
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET as string;
 
 function signAccessToken(payload: LoginArgumentsDTO): Promise<string> {
@@ -43,7 +45,7 @@ export default async function login(
   }
   const accessToken = await signAccessToken(user);
 
-  setCookie({ res: response }, 'accessToken', accessToken, {
+  setCookie({ res: response }, ACCESS_TOKEN, accessToken, {
     maxAge: 24 * 60 * 60, // 1 day
     path: '/',
   });
